@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Vocabulary saver",
+  "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+      	"https://dictionary.cambridge.org/*"
+      ],
+      "js": ["jquery-2.2.4.min.js", "content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  }
+}
