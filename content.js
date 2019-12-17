@@ -13,20 +13,27 @@ $("div.examp").each(function(index) {
 $(".saveLink").click(function() {
     const self = $(this);
     const parent = self.parent();
-    const exampleString = parent
-        .text()
-        .replace(/\[(.*?)\]/g, "") // removing everything in brackets, including "[Save]"
-        .trim();
-	const stringWithMarkedWord = markTargetWord(exampleString);
-	console.log(stringWithMarkedWord);
-	if (!isWordMarked(stringWithMarkedWord)) {
-        self.remove();
-        parent.append("<i style=\"color: red;\">Word not found in sentence (see log)</i>");
-		return;
-	}
+    const manuallyEditedInput = parent.find(".manuallyEdited").first();
+    const manuallyEditedValue = manuallyEditedInput.find("textarea").first().val();
+    var stringWithMarkedWord;
+    if (manuallyEditedValue) {
+    	stringWithMarkedWord = manuallyEditedValue;
+    } else {
+    	const exampleString = parent
+	        .text()
+        	.replace(/\[(.*?)\]/g, "") // removing everything in brackets, including "[Save]"
+        	.trim();
+		stringWithMarkedWord = markTargetWord(exampleString);
+		console.log(stringWithMarkedWord);
+		if (!isWordMarked(stringWithMarkedWord)) {
+        	parent.append("<div class=\"manuallyEdited\"><textarea>" + exampleString + "</textarea></div>");
+			return;
+		}
+    }
   	chrome.runtime.sendMessage(stringWithMarkedWord, function(response) {
         console.log('Saving: "' + stringWithMarkedWord + '"');
         self.remove();
+        manuallyEditedInput.remove();
         if (response.success) {
             parent.append("<i style=\"color: green;\">Saved</i>");
         } else {
