@@ -1,8 +1,9 @@
 const CLIENT_ID = '444973037518-hcoukn406meu93cufq0afsbh98k2tanb.apps.googleusercontent.com';
-const SPREADSHEET_ID = '1hpHaPeJ8QIv5yAFrRCn0p0yBs9PshJJBYYNOHP9EYhQ';
-const SPREADSHEET_TAB_NAME = 'Sheet1';
+const SPREADSHEET_ID = '1TqaBgB4ijD0PnSLE0iawa1Kkm8Fi4Cm-52wXT-nnQc4';
+const SPREADSHEET_TAB_NAME = 'English';
 
 let AUTH_TOKEN;
+let authDialogInitiatorTab;
 
 browser.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
@@ -18,8 +19,8 @@ browser.runtime.onMessage.addListener(
   }
 );
 
-function authorize() {
-  const redirectURL = "http://localhost/vocabulary-add/" //browser.identity.getRedirectURL();
+async function authorize() {
+  const redirectURL = "http://localhost/vocabulary-add/";
   const scopes = ["https://www.googleapis.com/auth/spreadsheets"];
   let authURL = "https://accounts.google.com/o/oauth2/auth";
   authURL += `?client_id=${CLIENT_ID}`;
@@ -27,24 +28,20 @@ function authorize() {
   authURL += `&redirect_uri=${encodeURIComponent(redirectURL)}`;
   authURL += `&scope=${encodeURIComponent(scopes.join(' '))}`;
 
+  authDialogInitiatorTab = await getCurrentTabId();
   if (!AUTH_TOKEN) {
-    var creating = browser.tabs.create({
-        url: authURL
-    }).then(function(tab) {
-        console.log(tab);
-    });
-    return Promise.reject();
-  } else {
-    return Promise.resolve(AUTH_TOKEN);
+    browser.tabs.create({ url: authURL });
+    waitForToken();
   }
+  return Promise.resolve(AUTH_TOKEN);
+}
 
-
-  // return browser.identity.launchWebAuthFlow({
-  //   interactive: true,
-  //   url: authURL
-  // }).then(function(redirectURL) {
-  //   return redirectURL.match(/access_token=([^&]+)&/)[1];
-  // });
+function waitForToken() {
+  if (typeof AUTH_TOKEN !== "undefined") {
+    return;
+  } else { 
+    setTimeout(waitForToken, 250);
+  }
 }
 
 async function addLineToSheet(line, token) {
@@ -62,17 +59,19 @@ async function addLineToSheet(line, token) {
   return await response.json(); // parses JSON response into native JavaScript objects
 }
 
-function logURL(requestDetails) {
+browser.webRequest.onBeforeRequest.addListener(function(requestDetails) {
   AUTH_TOKEN = requestDetails.url.match(/access_token=([^&]+)&/)[1];
-  console.log("Token: " + AUTH_TOKEN);
-  // browser.tabs.getCurrent().then(function(tabInfo) {
-      // console.log(tabInfo);
-    // browser.tabs.remove(tab.id);
-  // });
-  
+  closeCurrentTab();
+}, {urls: ["http://localhost/vocabulary-add/*"]});
+
+function closeCurrentTab() {
+  getCurrentTabId().then(function(currentTabId) {
+      browser.tabs.remove(currentTabId);
+  });
+  browser.tabs.update(authDialogInitiatorTab, {active: true});
 }
 
-browser.webRequest.onBeforeRequest.addListener(
-  logURL,
-  {urls: ["http://localhost/vocabulary-add/*"]}
-);
+async function getCurrentTabId() {
+  const tabs = await browser.tabs.query({currentWindow: true, active: true});
+  return tabs[0].id;
+}
