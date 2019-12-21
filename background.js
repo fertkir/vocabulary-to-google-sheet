@@ -1,39 +1,28 @@
-const API_KEY = 'AIzaSyCtq3pyX0R8jlaMVsrYeln_YRGY8LTGsyk';
-const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 const SPREADSHEET_ID = '1TqaBgB4ijD0PnSLE0iawa1Kkm8Fi4Cm-52wXT-nnQc4';
 const SPREADSHEET_TAB_NAME = 'English';
-
-function onGAPILoad() {
-  gapi.client.init({
-    apiKey: API_KEY,
-    discoveryDocs: DISCOVERY_DOCS,
-  });
-}
 
 chrome.extension.onMessage.addListener(
   function(request, sender, sendResponse) {
     chrome.identity.getAuthToken({interactive: true}, function(token) {
-      gapi.auth.setToken({
-        'access_token': token,
-      });
-
-      const body = {values: [[
-        request
-      ]]};
-
-      gapi.client.sheets.spreadsheets.values.append({
-        spreadsheetId: SPREADSHEET_ID,
-        range: SPREADSHEET_TAB_NAME,
-        valueInputOption: 'USER_ENTERED',
-        resource: body
-      }).then(response => {
-        console.log(`${response.result.updates.updatedCells} cells appended.`)
+      addLineToSheet(request, token).then(function() {
         sendResponse({success: true});
-      }, error => {
-        console.error(error);
-        sendResponse({success: false});
       });
     });
     return true; // wait for response
   }
 );
+
+async function addLineToSheet(line, token) {
+  let url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SPREADSHEET_TAB_NAME}:append`;
+  url += `?valueInputOption=USER_ENTERED`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({values: [[ line ]]})
+  });
+  return await response.json(); // parses JSON response into native JavaScript objects
+}
