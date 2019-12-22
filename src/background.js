@@ -10,8 +10,12 @@ browser.runtime.onMessage.addListener(
     console.log(request);
 
     authorize().then(function(token) {
-      addLineToSheet(request, token).then(function() {
+      addLineToSheet(request, token).then(function(response) {
+      	console.log(response);
         sendResponse({success: true});
+      }, function(error) {
+      	console.log(error);
+        sendResponse({success: false});
       });
     });
 
