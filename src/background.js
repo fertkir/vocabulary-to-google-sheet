@@ -33,18 +33,18 @@ async function authorize() {
 
   authDialogInitiatorTab = await getCurrentTabId();
   if (!AUTH_TOKEN) {
-    browser.tabs.create({ url: authURL });
-    waitForToken();
+  	browser.tabs.create({ url: authURL });
   }
-  return Promise.resolve(AUTH_TOKEN);
+  return tokenPromise();
 }
 
-function waitForToken() {
-  if (typeof AUTH_TOKEN !== "undefined") {
-    return;
-  } else { 
-    setTimeout(waitForToken, 250);
-  }
+function tokenPromise() {
+    return new Promise(function (resolve, reject) {
+        (function waitForToken(){
+            if (AUTH_TOKEN) return resolve(AUTH_TOKEN);
+            setTimeout(waitForToken, 250);
+        })();
+    });
 }
 
 async function addLineToSheet(line, token) {
