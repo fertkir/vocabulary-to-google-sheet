@@ -1,0 +1,29 @@
+{
+	"manifest_version": 2,
+  	"name": "Vocabulary saver",
+  	"version": "0.1",
+  	"key": "ioionmddbbnoeipdgoapbbimbmielekm",
+  	"content_security_policy": "script-src 'self' https://apis.google.com/; object-src 'self'",
+  	"background": {
+	    "scripts": ["background.js"],
+	    "persistent": false
+  	},
+  	"content_scripts": [{
+      	"matches": [
+	      	"https://dictionary.cambridge.org/*"
+      	],
+      	"js": ["jquery-2.2.4.min.js", "content.js"]
+	}],
+  	"browser_action": {
+	    "default_icon": "icon.png"
+  	},
+  	"oauth2": {
+	    "client_id": "444973037518-n5dc9rpf1hs992un81kjh3m1jdo7vomc.apps.googleusercontent.com",
+	    "scopes": [
+      		"https://www.googleapis.com/auth/spreadsheets"
+    	]
+  	},
+  	"permissions": [
+  		"identity"
+	]
+}
