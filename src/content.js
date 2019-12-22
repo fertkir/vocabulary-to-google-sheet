@@ -30,9 +30,6 @@ $(".saveLink").click(function() {
 			return;
 		}
     }
-    // console.log('Saving: "' + stringWithMarkedWord + '"');
-    // self.remove();
-    // manuallyEditedInput.remove();
 
     browser.runtime.sendMessage(stringWithMarkedWord).then(function(response) {
         console.log('Saving: "' + stringWithMarkedWord + '"');
@@ -45,13 +42,6 @@ $(".saveLink").click(function() {
             parent.append("<i style=\"color: red;\">Could not save to Google (see log)</i>");
         }
     });
-
-  	// browser.runtime.sendMessage(stringWithMarkedWord).then(function(message) {
-   //          parent.append("<i style=\"color: green;\">Saved</i>");
-   //  }, function(error) {
-   //          console.error('Could not save: "' + stringWithMarkedWord + '"');
-   //          parent.append("<i style=\"color: red;\">Could not save to Google (see log)</i>");
-   //  });
 });
 
 function markTargetWord(str) {
