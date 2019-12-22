@@ -11,7 +11,6 @@ browser.runtime.onMessage.addListener(
 
     authorize().then(function(token) {
       addLineToSheet(request, token).then(function(response) {
-      	console.log(response);
         sendResponse({success: true});
       }, function(error) {
       	console.log(error);
@@ -60,6 +59,9 @@ async function addLineToSheet(line, token) {
     },
     body: JSON.stringify({values: [[ line ]]})
   });
+  if (response.status !== 200) {
+  	return Promise.reject(new Error(response.statusText));
+  }
   return await response.json(); // parses JSON response into native JavaScript objects
 }
 
