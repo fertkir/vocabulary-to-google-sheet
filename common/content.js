@@ -1,3 +1,15 @@
+if (typeof browser === "undefined") {
+    browser = {
+        runtime: {
+            sendMessage: function(msg) {
+                return new Promise(function(resolve, reject) {
+                    chrome.runtime.sendMessage(msg, resolve);
+                });
+            }
+        }
+    }
+}
+
 const targetWord = window.location.toString()
 	.split('/')
 	.pop()
@@ -30,7 +42,7 @@ $(".saveLink").click(function() {
 			return;
 		}
     }
-  	chrome.runtime.sendMessage(stringWithMarkedWord, function(response) {
+  	browser.runtime.sendMessage(stringWithMarkedWord).then(function(response) {
         console.log('Saving: "' + stringWithMarkedWord + '"');
         self.remove();
         manuallyEditedInput.remove();

@@ -1,18 +1,18 @@
 # cleaning
-rm -rf *.xpi *.crx .build*
+rm -rf build
+
+mkdir build
+cd build
 
 # building firefox android extension
-cp -a firefox-android/. .build-firefox-android
-cp -a common/. .build-firefox-android
+cp -a ../firefox-android/. .build-firefox-android
+cp -a ../common/. .build-firefox-android
 cd .build-firefox-android
 zip -r -1 ../test@example.com.xpi *
 cd ..
 rm -r .build-firefox-android
 
 # building chrome extension
-cp -a chrome/. .build-chrome
-cp -a common/. .build-chrome
-cd .build-chrome
-zip -r -1 ../test@example.com.crx *
-cd ..
-rm -r .build-chrome
+cp -a ../chrome/. .build-chrome
+cp -a ../common/. .build-chrome
+mv .build-chrome vocabulary-chrome-extension
