@@ -60,9 +60,9 @@ async function addLineToSheet(line, token) {
     body: JSON.stringify({values: [[ line ]]})
   });
   if (response.status !== 200) {
-  	return Promise.reject(new Error(response.statusText));
+  	throw new Error(response.statusText);
   }
-  return await response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 browser.webRequest.onBeforeRequest.addListener(function(requestDetails) {
