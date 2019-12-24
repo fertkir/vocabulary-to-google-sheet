@@ -1,7 +1,7 @@
 browser = {
-	runtime: {
-		onMessage: {
-    		addListener: function(callback) {
+    runtime: {
+        onMessage: {
+            addListener: function(callback) {
 	        	chrome.extension.onMessage.addListener(callback);
         	}
 		}
