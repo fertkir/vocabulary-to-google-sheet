@@ -1,26 +1,19 @@
 {
-	"manifest_version": 2,
-  	"name": "Vocabulary saver",
-  	"version": "0.1",
-  	"content_security_policy": "script-src 'self' https://apis.google.com/; object-src 'self'",
-  	"background": {
-      "scripts": ["background-polyfills.js", "background.js"]
-  	},
-  	"content_scripts": [{
-      	"matches": [
-	      	"https://dictionary.cambridge.org/*"
-      	],
-      	"js": ["jquery-2.2.4.min.js", "content.js"]
-	}],
-  	"browser_action": {
-	    "default_icon": "icon.png"
-  	},
-  	"permissions": [
-  		"identity"
-	],
-	"browser_specific_settings": {
-  		"gecko": {
-    		"id": "test@example.com"
-  		}
-	}
+ "content_scripts": [{
+   "matches": [
+    "https://dictionary.cambridge.org/*"
+  ],
+   "js": ["jquery-2.2.4.min.js", "content.js"]
+ }],
+ "browser_action": {
+   "default_icon": "icon.png"
+ },
+ "permissions": [
+  "identity"
+],
+ "browser_specific_settings": {
+  "gecko": {
+    "id": "test@example.com"
+  }
+}
 }
