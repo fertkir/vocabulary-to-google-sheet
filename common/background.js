@@ -1,11 +1,15 @@
 const SPREADSHEET_ID = '1TqaBgB4ijD0PnSLE0iawa1Kkm8Fi4Cm-52wXT-nnQc4';
 const SPREADSHEET_TAB_NAME = 'English';
 
-chrome.extension.onMessage.addListener(
+browser.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    chrome.identity.getAuthToken({interactive: true}, function(token) {
+    console.log(request);
+    authorize().then(function(token) {
       addLineToSheet(request, token).then(function() {
         sendResponse({success: true});
+      }, function(error) {
+        console.log(error);
+        sendResponse({success: false});
       });
     });
     return true; // wait for response
@@ -24,5 +28,8 @@ async function addLineToSheet(line, token) {
     },
     body: JSON.stringify({values: [[ line ]]})
   });
-  return await response.json(); // parses JSON response into native JavaScript objects
+  if (response.status !== 200) {
+    throw new Error(response.statusText);
+  }
+  return response.json(); // parses JSON response into native JavaScript objects
 }

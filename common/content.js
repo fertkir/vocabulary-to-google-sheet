@@ -1,15 +1,3 @@
-if (typeof browser === "undefined") {
-    browser = {
-        runtime: {
-            sendMessage: function(msg) {
-                return new Promise(function(resolve, reject) {
-                    chrome.runtime.sendMessage(msg, resolve);
-                });
-            }
-        }
-    }
-}
-
 const targetWord = window.location.toString()
 	.split('/')
 	.pop()
