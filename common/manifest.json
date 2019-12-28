@@ -1,9 +1,44 @@
 {
-	"manifest_version": 2,
-	"name": "Vocabulary saver",
-	"version": "0.1",
-	"content_security_policy": "script-src 'self' https://apis.google.com/; object-src 'self'",
-	"background": {
-		"scripts": ["background-polyfills.js", "background.js"]
-	}
+  "manifest_version": 2,
+  "name": "Vocabulary saver",
+  "version": "0.1",
+  "content_security_policy": "script-src 'self' https://apis.google.com/; object-src 'self'",
+  "background": {
+    "scripts": ["background-polyfills.js", "background.js"]
+  },
+  "content_scripts": [
+  {
+    "matches": [
+      "*://dictionary.cambridge.org/*",
+      "*://*.thefreedictionary.com/*",
+      "*://*.spanishdict.com/*"
+    ],
+    "js": ["jquery-2.2.4.min.js"]
+  },
+  {
+    "matches": [
+      "*://dictionary.cambridge.org/*"
+    ],
+    "js": ["cambridge.js"]
+  },
+  {
+    "matches": [
+      "*://*.thefreedictionary.com/*"
+    ],
+    "js": ["freedictionary.js"]
+  },
+  {
+    "matches": [
+      "*://*.spanishdict.com/*"
+    ],
+    "js": ["spanishdict.js"]
+  },
+  {
+    "matches": [
+      "*://dictionary.cambridge.org/*",
+      "*://*.thefreedictionary.com/*",
+      "*://*.spanishdict.com/*"
+    ],
+    "js": ["content-polyfills.js", "content.js"]
+  }]
 }

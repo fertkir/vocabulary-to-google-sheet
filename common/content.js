@@ -1,12 +1,6 @@
-const targetWord = window.location.toString()
-	.split('/')
-	.pop()
-	.split(/[\\?#]/)
-	.shift()
-	.replace(/[+-]/g, ' ');
 console.log('targetWord: ' + targetWord);
 
-$("div.examp, span.illustration").each(function(index) {
+exampleSelector.each(function(index) {
     $(this).append("&nbsp;<a class=\"saveLink\" href=\"javascript:void(0);\">[Save]</a>");
 });
 
@@ -30,7 +24,7 @@ $(".saveLink").click(function() {
 			return;
 		}
     }
-  	browser.runtime.sendMessage(stringWithMarkedWord).then(function(response) {
+  	browser.runtime.sendMessage({language: language, str: stringWithMarkedWord}).then(function(response) {
         console.log('Saving: "' + stringWithMarkedWord + '"');
         self.remove();
         manuallyEditedInput.remove();
@@ -44,9 +38,16 @@ $(".saveLink").click(function() {
 });
 
 function markTargetWord(str) {
-    const word = targetWord.endsWith('y') 
-	   ? targetWord.substring(0, targetWord.length - 1) 
-	   : targetWord;
+    let word = targetWord;
+    if (language === 'en') {
+        word = targetWord.endsWith('y') 
+            ? targetWord.substring(0, targetWord.length - 1) 
+            : targetWord;
+    } else if (language === 'es') {
+        word = targetWord.length > 3
+            ? targetWord.substring(0, targetWord.length - 2) 
+            : targetWord;
+    }
 	return str.replace(new RegExp(word + "\\w*","ig"), "*$&*");
 }
 
