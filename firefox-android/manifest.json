@@ -1,7 +1,8 @@
 {
   "content_scripts": [{
     "matches": [
-      "https://dictionary.cambridge.org/*"
+      "https://dictionary.cambridge.org/*",
+      "https://*.thefreedictionary.com/*"
     ],
     "js": ["jquery-2.2.4.min.js", "content.js"]
   }],

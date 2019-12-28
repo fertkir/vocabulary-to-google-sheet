@@ -3,10 +3,10 @@ const targetWord = window.location.toString()
 	.pop()
 	.split(/[\\?#]/)
 	.shift()
-	.replace(/-/g, ' ');
+	.replace(/[+-]/g, ' ');
 console.log('targetWord: ' + targetWord);
 
-$("div.examp").each(function(index) {
+$("div.examp, span.illustration").each(function(index) {
     $(this).append("&nbsp;<a class=\"saveLink\" href=\"javascript:void(0);\">[Save]</a>");
 });
 
