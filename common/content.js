@@ -9,7 +9,7 @@ $(".saveLink").click(function() {
     const parent = self.parent();
     const manuallyEditedInput = parent.find(".manuallyEdited").first();
     const manuallyEditedValue = manuallyEditedInput.find("textarea").first().val();
-    var stringWithMarkedWord;
+    let stringWithMarkedWord;
     if (manuallyEditedValue) {
     	stringWithMarkedWord = manuallyEditedValue;
     } else {
@@ -32,7 +32,7 @@ $(".saveLink").click(function() {
             parent.append("<i style=\"color: green;\">Saved</i>");
         } else {
             console.error('Could not save: "' + stringWithMarkedWord + '"');
-        	parent.append("<i style=\"color: red;\">Could not save to Google (see log)</i>");
+        	parent.append(`<i style="color: red;">Could not save (${response.message})</i>`);
         }
   	});
 });
