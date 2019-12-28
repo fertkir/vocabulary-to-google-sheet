@@ -1,9 +1,3 @@
-const SPREADSHEET_ID = '1TqaBgB4ijD0PnSLE0iawa1Kkm8Fi4Cm-52wXT-nnQc4';
-const SPREADSHEET_TABS = {
-  'en': 'English',
-  'es': 'Español'
-};
-
 browser.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(request);
@@ -20,7 +14,12 @@ browser.runtime.onMessage.addListener(
 );
 
 async function addLineToSheet(line, language, token) {
-  let url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SPREADSHEET_TABS[language]}:append`;
+  const settings = await browser.storage.sync.get(['spreadsheet','enSheet','esSheet']);
+  const sheets = {
+    'en': settings.enSheet,
+    'es': settings.esSheet
+  };
+  let url = `https://sheets.googleapis.com/v4/spreadsheets/${settings.spreadsheet}/values/${sheets[language]}:append`;
   url += `?valueInputOption=USER_ENTERED`;
 
   const response = await fetch(url, {

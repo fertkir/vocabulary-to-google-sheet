@@ -3,7 +3,8 @@
    "default_icon": "icon.png"
  },
  "permissions": [
-  "identity"
+  "identity",
+  "storage"
 ],
  "browser_specific_settings": {
   "gecko": {

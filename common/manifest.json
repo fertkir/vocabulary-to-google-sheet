@@ -40,5 +40,9 @@
       "*://*.spanishdict.com/*"
     ],
     "js": ["content-polyfills.js", "content.js"]
-  }]
+  }],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  }
 }

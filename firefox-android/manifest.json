@@ -1,7 +1,8 @@
 {
   "permissions": [
     "webRequest",
-    "http://localhost/vocabulary-add/*"
+    "http://localhost/vocabulary-add/*",
+    "storage"
   ],
   "browser_specific_settings": {
     "gecko": {

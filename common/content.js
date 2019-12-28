@@ -48,7 +48,7 @@ function markTargetWord(str) {
             ? targetWord.substring(0, targetWord.length - 2) 
             : targetWord;
     }
-	return str.replace(new RegExp(word + "\\w*","ig"), "*$&*");
+	return str.replace(new RegExp(word + "[^\\s.?,!:;]*","ig"), "*$&*");
 }
 
 function isWordMarked(str) {
