@@ -19,19 +19,19 @@
     "matches": [
       "*://dictionary.cambridge.org/*"
     ],
-    "js": ["cambridge.js"]
+    "js": ["sites/cambridge.js"]
   },
   {
     "matches": [
       "*://*.thefreedictionary.com/*"
     ],
-    "js": ["freedictionary.js"]
+    "js": ["sites/freedictionary.js"]
   },
   {
     "matches": [
       "*://*.spanishdict.com/*"
     ],
-    "js": ["spanishdict.js"]
+    "js": ["sites/spanishdict.js"]
   },
   {
     "matches": [
