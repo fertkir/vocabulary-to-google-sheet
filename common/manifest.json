@@ -3,7 +3,7 @@
   "name": "Vocabulary saver",
   "version": "0.1",
   "background": {
-    "scripts": ["background-polyfills.js", "background.js"]
+    "page": "background.html"
   },
   "content_scripts": [
   {

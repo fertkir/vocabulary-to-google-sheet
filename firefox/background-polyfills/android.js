@@ -1,20 +1,12 @@
-const CLIENT_ID = '444973037518-hcoukn406meu93cufq0afsbh98k2tanb.apps.googleusercontent.com';
+if (!browser.identity) {
 
 let AUTH_TOKEN;
 let authDialogInitiatorTab;
 
-async function authorize() {
-  const redirectURL = "http://localhost/vocabulary-add/";
-  const scopes = ["https://www.googleapis.com/auth/spreadsheets"];
-  let authURL = "https://accounts.google.com/o/oauth2/auth";
-  authURL += `?client_id=${CLIENT_ID}`;
-  authURL += `&response_type=token`;
-  authURL += `&redirect_uri=${encodeURIComponent(redirectURL)}`;
-  authURL += `&scope=${encodeURIComponent(scopes.join(' '))}`;
-
+authorize = async function() {
   authDialogInitiatorTab = await getCurrentTabId();
   if (!AUTH_TOKEN) {
-  	browser.tabs.create({ url: authURL });
+    browser.tabs.create({ url: AUTH_URL });
   }
   return tokenPromise();
 }
@@ -43,4 +35,6 @@ function closeCurrentTab() {
 async function getCurrentTabId() {
   const tabs = await browser.tabs.query({currentWindow: true, active: true});
   return tabs[0].id;
+}
+
 }
