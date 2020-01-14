@@ -8,4 +8,4 @@ const targetWord = window.location.toString()
 	.replace(/[+-]/g, ' ')
 	.replace(/%20/g, ' ');
 	
-const exampleSelector = $(".mw_t_sp, .ex-sent");
+const exampleSelector = $(".ex-sent");
