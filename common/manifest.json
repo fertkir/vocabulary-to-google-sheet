@@ -10,7 +10,8 @@
     "matches": [
       "*://dictionary.cambridge.org/*",
       "*://*.thefreedictionary.com/*",
-      "*://*.spanishdict.com/*"
+      "*://*.spanishdict.com/*",
+      "*://*.merriam-webster.com/*"
     ],
     "js": ["jquery-3.4.1.min.js"]
   },
@@ -34,9 +35,16 @@
   },
   {
     "matches": [
+      "*://*.merriam-webster.com/*"
+    ],
+    "js": ["sites/merriam-webster.js"]
+  },
+  {
+    "matches": [
       "*://dictionary.cambridge.org/*",
       "*://*.thefreedictionary.com/*",
-      "*://*.spanishdict.com/*"
+      "*://*.spanishdict.com/*",
+      "*://*.merriam-webster.com/*"
     ],
     "js": ["content-polyfills.js", "content.js"]
   }],
