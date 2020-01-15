@@ -30,17 +30,18 @@ $(".saveLink").click(function() {
 			return;
 		}
     }
-  	browser.runtime.sendMessage({language: language, str: stringWithMarkedWord}).then(function(response) {
-        console.log('Saving: "' + stringWithMarkedWord + '"');
-        self.remove();
-        manuallyEditedInput.remove();
-        if (response.success) {
-            parent.append("<i style=\"color: green;\">Saved</i>");
-        } else {
-            console.error('Could not save: "' + stringWithMarkedWord + '"');
-        	parent.append(`<i style="color: red;">Could not save (${response.message})</i>`);
-        }
-  	});
+  	browser.runtime.sendMessage({language: language, str: stringWithMarkedWord, url: window.location.href})
+        .then(function(response) {
+            console.log('Saving: "' + stringWithMarkedWord + '"');
+            self.remove();
+            manuallyEditedInput.remove();
+            if (response.success) {
+                parent.append("<i style=\"color: green;\">Saved</i>");
+            } else {
+                console.error('Could not save: "' + stringWithMarkedWord + '"');
+        	    parent.append(`<i style="color: red;">Could not save (${response.message})</i>`);
+            }
+  	    });
 });
 
 function markTargetWord(str) {

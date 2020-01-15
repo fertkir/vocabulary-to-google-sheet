@@ -1,6 +1,6 @@
 const language = "es";
 
-const isSpanishPage = $("div[id^='dictionary-results']").attr("id").endsWith(language);
+const isSpanishPage = $("div[id^='dictionary-']").attr("id").endsWith(language);
 
 const targetWord = isSpanishPage
 	? $("div[id^='headword']").text()

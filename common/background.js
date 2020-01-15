@@ -2,7 +2,7 @@ browser.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(request);
     authorize().then(function(token) {
-      addLineToSheet(request.str, request.language, token).then(function() {
+      addLineToSheet(request.str, request.url, request.language, token).then(function() {
         sendResponse({success: true});
       }, function(error) {
         sendResponse({success: false, message: error.message});
@@ -12,7 +12,7 @@ browser.runtime.onMessage.addListener(
   }
 );
 
-async function addLineToSheet(line, language, token) {
+async function addLineToSheet(line, dictionaryUrl, language, token) {
   const settings = await getSettings();
   let url = `https://sheets.googleapis.com/v4/spreadsheets/${settings.spreadsheet}/values/${settings.sheets[language]}:append`;
   url += `?valueInputOption=USER_ENTERED`;
@@ -23,7 +23,7 @@ async function addLineToSheet(line, language, token) {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({values: [[ line ]]})
+    body: JSON.stringify({values: [[ line,"","",dictionaryUrl ]]})
   });
   if (response.status !== 200) {
     throw new Error(response.statusText);
