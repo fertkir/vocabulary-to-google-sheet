@@ -23,7 +23,7 @@ async function addLineToSheet(line, dictionaryUrl, language, token) {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({values: [[ line,"","",dictionaryUrl ]]})
+    body: JSON.stringify(settings.sendUrls ? {values: [[ line,"","",dictionaryUrl ]]} : {values: [[ line ]]})
   });
   if (response.status !== 200) {
     throw new Error(response.statusText);
@@ -32,7 +32,7 @@ async function addLineToSheet(line, dictionaryUrl, language, token) {
 }
 
 async function getSettings() {
-  const settings = await browser.storage.sync.get(['spreadsheet','enSheet','esSheet','ruSheet']);
+  const settings = await browser.storage.sync.get(['spreadsheet','sendUrls','enSheet','esSheet','ruSheet']);
   if (!settings.spreadsheet) {
       throw Error("Please set Spreadsheet ID in extension settings");
   }
@@ -42,6 +42,7 @@ async function getSettings() {
       'en': settings.enSheet,
       'es': settings.esSheet,
       'ru': settings.ruSheet
-    }
+    },
+    sendUrls: settings.sendUrls
   }
 }
