@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Vocabulary saver",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "background": {
     "page": "background.html"
   },

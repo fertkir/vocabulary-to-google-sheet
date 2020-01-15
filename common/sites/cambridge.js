@@ -7,4 +7,4 @@ const targetWord = window.location.toString()
 	.shift()
 	.replace(/[+-]/g, ' ');
 
-const exampleSelector = $("div.examp");
+const exampleSelector = $("div.examp, li.eg");
