@@ -10,7 +10,7 @@ cp -a ../common/. .build-firefox
 jq -s '.[0] * .[1]' ../common/manifest.json ../firefox/manifest.json > .build-firefox/manifest.json
 mkdir firefox
 cd .build-firefox
-zip -r -1 ../firefox/test@example.com.xpi *
+zip -r -1 ../firefox/{7cadcc4b-af6c-4227-a247-7122bfeea911}.xpi *
 cd ..
 rm -r .build-firefox
 
