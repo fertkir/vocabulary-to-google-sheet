@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Vocabulary saver",
-  "version": "0.2",
+  "version": "0.2.1",
   "background": {
     "page": "background.html"
   },
@@ -11,7 +11,8 @@
       "*://dictionary.cambridge.org/*",
       "*://*.thefreedictionary.com/*",
       "*://*.spanishdict.com/*",
-      "*://*.merriam-webster.com/*"
+      "*://*.merriam-webster.com/*",
+      "*://ru.wiktionary.org/*"
     ],
     "js": ["jquery-3.4.1.min.js"]
   },
@@ -41,10 +42,17 @@
   },
   {
     "matches": [
+      "*://ru.wiktionary.org/*"
+    ],
+    "js": ["sites/ru-wiktionary.js"]
+  },
+  {
+    "matches": [
       "*://dictionary.cambridge.org/*",
       "*://*.thefreedictionary.com/*",
       "*://*.spanishdict.com/*",
-      "*://*.merriam-webster.com/*"
+      "*://*.merriam-webster.com/*",
+      "*://ru.wiktionary.org/*"
     ],
     "js": ["content-polyfills.js", "content.js"]
   }],

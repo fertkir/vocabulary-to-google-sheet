@@ -13,7 +13,13 @@ $(".saveLink").click(function() {
     if (manuallyEditedValue) {
     	stringWithMarkedWord = manuallyEditedValue;
     } else {
-    	const exampleString = parent
+        const exampleElement = typeof excludedChildrenFromExample !== 'undefined' 
+          ? parent.clone()
+                  .children(excludedChildrenFromExample)
+                  .remove()
+                  .end()
+          : parent;
+    	const exampleString = exampleElement
 	        .text()
         	.replace(/\[(.*?)\]/g, "") // removing everything in brackets, including "[Save]"
         	.trim();

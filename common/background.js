@@ -32,7 +32,7 @@ async function addLineToSheet(line, language, token) {
 }
 
 async function getSettings() {
-  const settings = await browser.storage.sync.get(['spreadsheet','enSheet','esSheet']);
+  const settings = await browser.storage.sync.get(['spreadsheet','enSheet','esSheet','ruSheet']);
   if (!settings.spreadsheet) {
       throw Error("Please set Spreadsheet ID in extension settings");
   }
@@ -40,7 +40,8 @@ async function getSettings() {
     spreadsheet: settings.spreadsheet,
     sheets: {
       'en': settings.enSheet,
-      'es': settings.esSheet
+      'es': settings.esSheet,
+      'ru': settings.ruSheet
     }
   }
 }
