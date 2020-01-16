@@ -4,6 +4,11 @@ browser = {
             addListener: function(callback) {
                 chrome.extension.onMessage.addListener(callback);
             }
+        },
+        openOptionsPage: function() {
+            return new Promise(function(resolve, reject) {
+                chrome.runtime.openOptionsPage(resolve);
+            });
         }
     },
     storage: {
