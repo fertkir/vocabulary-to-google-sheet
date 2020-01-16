@@ -5,5 +5,6 @@ browser = {
                 chrome.runtime.sendMessage(msg, resolve);
             });
         }
-    }
+    },
+    i18n: chrome.i18n
 }

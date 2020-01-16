@@ -1,7 +1,7 @@
 console.log('targetWord: ' + targetWord);
 
 exampleSelector.each(function(index) {
-    $(this).append("&nbsp;<a class=\"saveLink\" href=\"javascript:void(0);\">[Save]</a>");
+    $(this).append(`&nbsp;<a class="saveLink" href="javascript:void(0);">[${browser.i18n.getMessage("save")}]</a>`);
 });
 
 $(".saveLink").click(function() {
@@ -36,10 +36,10 @@ $(".saveLink").click(function() {
             self.remove();
             manuallyEditedInput.remove();
             if (response.success) {
-                parent.append("<i style=\"color: green;\">Saved</i>");
+                parent.append(`<i style="color: green;">${browser.i18n.getMessage("saved")}</i>`);
             } else {
                 console.error('Could not save: "' + stringWithMarkedWord + '"');
-        	    parent.append(`<i style="color: red;">Could not save (${response.message})</i>`);
+        	    parent.append(`<i style="color: red;">${browser.i18n.getMessage("couldNotSave")} (${response.message})</i>`);
             }
   	    });
 });

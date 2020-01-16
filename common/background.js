@@ -34,7 +34,7 @@ async function addLineToSheet(line, dictionaryUrl, language, token) {
 async function getSettings() {
   const settings = await browser.storage.sync.get(['spreadsheet','sendUrls','enSheet','esSheet','ruSheet']);
   if (!settings.spreadsheet) {
-      throw Error("Please set Spreadsheet ID in extension settings");
+      throw Error(browser.i18n.getMessage("setSpreadSheetId"));
   }
   return {
     spreadsheet: settings.spreadsheet,

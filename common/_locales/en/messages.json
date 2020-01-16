@@ -1,0 +1,23 @@
+{
+  "extensionName": {
+    "message": "Vocabulary to Google Sheet"
+  },
+  "extensionDescription": {
+    "message": "Adds shortcuts to dictionary sites for saving new vocabulary with its context to a Google Sheet."
+  },
+  "setSpreadSheetId": {
+    "message": "Please set Spreadsheet ID in extension settings"
+  },
+  "couldNotSave": {
+    "message": "Could not save"
+  },
+  "saved": {
+    "message": "Saved"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "optionsSaved": {
+    "message": "Options saved."
+  }
+}

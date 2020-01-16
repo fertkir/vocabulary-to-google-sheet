@@ -7,7 +7,7 @@ function save_options() {
     ruSheet: document.getElementById('ruSheet').value
   }, function() {
     var status = document.getElementById('status');
-    status.textContent = 'Options saved.';
+    status.textContent = browser.i18n.getMessage("optionsSaved");
     setTimeout(function() {
       status.textContent = '';
     }, 750);
