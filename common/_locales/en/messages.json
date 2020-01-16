@@ -19,5 +19,26 @@
   },
   "optionsSaved": {
     "message": "Options saved."
+  },
+  "optionsTitle": {
+    "message": "Options"
+  },
+  "optionsSpreadsheetId": {
+    "message": "Spreadsheet ID"
+  },
+  "optionsSaveUrls": {
+    "message": "Save URLs"
+  },
+  "optionsEnglishSheet": {
+    "message": "English sheet"
+  },
+  "optionsSpanishSheet": {
+    "message": "Spanish sheet"
+  },
+  "optionsRussianSheet": {
+    "message": "Russian sheet"
+  },
+  "optionsSave": {
+    "message": "Save"
   }
 }

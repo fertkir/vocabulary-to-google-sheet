@@ -19,5 +19,26 @@
   },
   "optionsSaved": {
     "message": "Настройки сохранены."
+  },
+  "optionsTitle": {
+    "message": "Настройки"
+  },
+  "optionsSpreadsheetId": {
+    "message": "ID Google таблицы"
+  },
+  "optionsSaveUrls": {
+    "message": "Сохранять URL"
+  },
+  "optionsEnglishSheet": {
+    "message": "Название листа с английским"
+  },
+  "optionsSpanishSheet": {
+    "message": "Название листа с испанским"
+  },
+  "optionsRussianSheet": {
+    "message": "Название листа с русским"
+  },
+  "optionsSave": {
+    "message": "Сохранить"
   }
 }
