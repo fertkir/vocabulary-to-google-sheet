@@ -14,7 +14,8 @@
       "*://*.thefreedictionary.com/*",
       "*://*.spanishdict.com/*",
       "*://*.merriam-webster.com/*",
-      "*://ru.wiktionary.org/*"
+      "*://ru.wiktionary.org/*",
+      "*://*.macmillandictionary.com/*"
     ],
     "js": ["jquery-3.4.1.min.js"]
   },
@@ -50,11 +51,18 @@
   },
   {
     "matches": [
+      "*://*.macmillandictionary.com/*"
+    ],
+    "js": ["sites/macmillandictionary.js"]
+  },
+  {
+    "matches": [
       "*://dictionary.cambridge.org/*",
       "*://*.thefreedictionary.com/*",
       "*://*.spanishdict.com/*",
       "*://*.merriam-webster.com/*",
-      "*://ru.wiktionary.org/*"
+      "*://ru.wiktionary.org/*",
+      "*://*.macmillandictionary.com/*"
     ],
     "js": ["content-polyfills.js", "content.js"]
   }],
