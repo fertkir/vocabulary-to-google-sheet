@@ -1,11 +1,5 @@
 const language = "en";
 
-const targetWord = window.location.toString()
-	.split('/')
-	.pop()
-	.split(/[\\?#]/)
-	.shift()
-	.replace(/[+-]/g, ' ')
-	.replace(/%20/g, ' ');
+const targetWord = $("#headword span.BASE").text();
 	
 const exampleSelector = $("div.EXAMPLES");

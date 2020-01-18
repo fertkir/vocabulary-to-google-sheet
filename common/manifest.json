@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "default_locale": "en",
   "background": {
     "page": "background.html"
@@ -14,7 +14,7 @@
       "*://*.thefreedictionary.com/*",
       "*://*.spanishdict.com/*",
       "*://*.merriam-webster.com/*",
-      "*://ru.wiktionary.org/*",
+      "*://*.wiktionary.org/*",
       "*://*.macmillandictionary.com/*"
     ],
     "js": ["jquery-3.4.1.min.js"]
@@ -45,7 +45,7 @@
   },
   {
     "matches": [
-      "*://ru.wiktionary.org/*"
+      "*://*.wiktionary.org/*"
     ],
     "js": ["sites/ru-wiktionary.js"]
   },
@@ -61,7 +61,7 @@
       "*://*.thefreedictionary.com/*",
       "*://*.spanishdict.com/*",
       "*://*.merriam-webster.com/*",
-      "*://ru.wiktionary.org/*",
+      "*://*.wiktionary.org/*",
       "*://*.macmillandictionary.com/*"
     ],
     "js": ["content-polyfills.js", "content.js"]
