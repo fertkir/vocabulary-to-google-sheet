@@ -30,16 +30,16 @@ $(".saveLink").click(function() {
 			return;
 		}
     }
+    console.log('Saving: "' + stringWithMarkedWord + '"');
+    const saving = $(`<span>${browser.i18n.getMessage("saving")}</span>`).replaceAll(self);
   	browser.runtime.sendMessage({language: language, str: stringWithMarkedWord, url: window.location.href})
         .then(function(response) {
-            console.log('Saving: "' + stringWithMarkedWord + '"');
-            self.remove();
             manuallyEditedInput.remove();
             if (response.success) {
-                parent.append(`<i style="color: green;">${browser.i18n.getMessage("saved")}</i>`);
+                saving.replaceWith(`<i style="color: green;">${browser.i18n.getMessage("saved")}</i>`);
             } else {
                 console.error('Could not save: "' + stringWithMarkedWord + '"');
-        	    parent.append(`<i style="color: red;">${browser.i18n.getMessage("couldNotSave")} (${response.message})</i>`);
+        	    saving.replaceWith(`<i style="color: red;">${browser.i18n.getMessage("couldNotSave")} (${response.message})</i>`);
             }
   	    });
 });

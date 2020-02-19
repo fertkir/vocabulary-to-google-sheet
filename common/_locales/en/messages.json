@@ -17,6 +17,9 @@
   "save": {
     "message": "Save"
   },
+  "saving": {
+    "message": "Saving..."
+  },
   "optionsSaved": {
     "message": "Options saved."
   },

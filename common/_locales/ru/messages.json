@@ -17,6 +17,9 @@
   "save": {
     "message": "Сохранить"
   },
+  "saving": {
+    "message": "Сохранение..."
+  },
   "optionsSaved": {
     "message": "Настройки сохранены."
   },
