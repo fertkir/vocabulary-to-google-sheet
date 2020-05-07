@@ -1,6 +1,6 @@
 {
  "browser_action": {
-   "default_icon": "icon.png"
+   "default_icon": "icons/icon128.png"
  },
  "permissions": [
   "identity",
@@ -12,5 +12,8 @@
   "gecko": {
     "id": "{7cadcc4b-af6c-4227-a247-7122bfeea911}"
   }
+},
+"icons": {
+	"48": "icons/icon48.png"
 }
 }
