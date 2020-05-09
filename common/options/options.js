@@ -21,6 +21,34 @@ function localizeHtmlPage()
 
 localizeHtmlPage();
 
+function showStatusMessage(message) {
+  var status = document.getElementById('status');
+  status.textContent = message;
+  setTimeout(function() {
+    status.textContent = '';
+  }, 750);
+}
+
+async function fetchSiteSettings() {
+  const response = await fetch('https://fertkir.bitbucket.io/vocabulary/browser-addon/sites-settings.json');
+  if (response.status !== 200) {
+    throw new Error(response.statusText);
+  }
+  return response.json();
+}
+
+function reload_site_settings() {
+  fetchSiteSettings().then(function(settings) {
+    chrome.storage.sync.set({
+      sitesSettings: settings
+    }, function() {
+      showStatusMessage(browser.i18n.getMessage("optionsSiteSettingsLoaded"));
+    });
+  }, function(error) {
+      showStatusMessage(browser.i18n.getMessage("optionsSiteSettingsLoadError"));
+  });
+}
+
 function save_options() {
   chrome.storage.sync.set({
     spreadsheet: document.getElementById('spreadsheet').value,
@@ -29,11 +57,7 @@ function save_options() {
     esSheet: document.getElementById('esSheet').value,
     ruSheet: document.getElementById('ruSheet').value
   }, function() {
-    var status = document.getElementById('status');
-    status.textContent = browser.i18n.getMessage("optionsSaved");
-    setTimeout(function() {
-      status.textContent = '';
-    }, 750);
+    showStatusMessage(browser.i18n.getMessage("optionsSaved"));
   });
 }
 
@@ -55,3 +79,4 @@ function restore_options() {
 
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);
+document.getElementById('reloadSettings').addEventListener('click', reload_site_settings);

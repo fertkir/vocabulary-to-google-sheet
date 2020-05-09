@@ -43,5 +43,14 @@
   },
   "optionsSave": {
     "message": "Save"
+  },
+  "optionsLoadSiteSettings": {
+    "message": "Reload site settings"
+  },
+  "optionsSiteSettingsLoaded": {
+    "message": "Site settings reloaded."
+  },
+  "optionsSiteSettingsLoadError": {
+    "message": "Error while loading site settings. Try later."
   }
 }

@@ -43,5 +43,14 @@
   },
   "optionsSave": {
     "message": "Сохранить"
+  },
+  "optionsLoadSiteSettings": {
+    "message": "Обновить настройки сайтов"
+  },
+  "optionsSiteSettingsLoaded": {
+    "message": "Настройки сайтов обновлены."
+  },
+  "optionsSiteSettingsLoadError": {
+    "message": "Ошибка при загрузке настроек сайтов. Попробуйте позже."
   }
 }

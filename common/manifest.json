@@ -2,69 +2,14 @@
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "default_locale": "en",
   "background": {
     "page": "background.html"
   },
-  "content_scripts": [
-  {
-    "matches": [
-      "*://dictionary.cambridge.org/*",
-      "*://*.thefreedictionary.com/*",
-      "*://*.spanishdict.com/*",
-      "*://*.merriam-webster.com/*",
-      "*://*.wiktionary.org/*",
-      "*://*.macmillandictionary.com/*"
-    ],
-    "js": ["jquery-3.4.1.min.js"]
-  },
-  {
-    "matches": [
-      "*://dictionary.cambridge.org/*"
-    ],
-    "js": ["sites/cambridge.js"]
-  },
-  {
-    "matches": [
-      "*://*.thefreedictionary.com/*"
-    ],
-    "js": ["sites/freedictionary.js"]
-  },
-  {
-    "matches": [
-      "*://*.spanishdict.com/*"
-    ],
-    "js": ["sites/spanishdict.js"]
-  },
-  {
-    "matches": [
-      "*://*.merriam-webster.com/*"
-    ],
-    "js": ["sites/merriam-webster.js"]
-  },
-  {
-    "matches": [
-      "*://*.wiktionary.org/*"
-    ],
-    "js": ["sites/ru-wiktionary.js"]
-  },
-  {
-    "matches": [
-      "*://*.macmillandictionary.com/*"
-    ],
-    "js": ["sites/macmillandictionary.js"]
-  },
-  {
-    "matches": [
-      "*://dictionary.cambridge.org/*",
-      "*://*.thefreedictionary.com/*",
-      "*://*.spanishdict.com/*",
-      "*://*.merriam-webster.com/*",
-      "*://*.wiktionary.org/*",
-      "*://*.macmillandictionary.com/*"
-    ],
-    "js": ["content-polyfills.js", "content.js"]
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["jquery-3.4.1.min.js", "sites-settings.js", "content-polyfills.js", "content.js"]
   }],
   "options_ui": {
     "page": "options/options.html",
