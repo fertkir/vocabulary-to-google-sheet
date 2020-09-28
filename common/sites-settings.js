@@ -4,24 +4,24 @@ const defaultSitesSettings = {
 		"targetWordSource": "url",
 		"exampleSelector": "div.examp, li.eg"
 	},
-	"www.google.com": {
+	"google.*": {
 		"language": "en",
 		"targetWordSource": "html",
 		"targetWordSelector": "span[data-dobid^='hdw']",
 		"exampleSelector": "div.vk_gy"
 	},
-	"www.thefreedictionary.com": {
+	"thefreedictionary.com": {
 		"language": "en",
 		"targetWordSource": "url",
 		"exampleSelector": "span.illustration"
 	},
-	"www.macmillandictionary.com": {
+	"macmillandictionary.com": {
 		"language": "en",
 		"targetWordSource": "html",
 		"targetWordSelector": "h1 span.BASE",
 		"exampleSelector": "div.EXAMPLES"
 	},
-	"www.merriam-webster.com": {
+	"merriam-webster.com": {
 		"language": "en",
 		"targetWordSource": "url",
 		"exampleSelector": ".ex-sent"
@@ -32,19 +32,19 @@ const defaultSitesSettings = {
 		"exampleSelector": ".example-block",
 		"excludedChildrenFromExampleSelector": ".example-details"
 	},
-	"www.spanishdict.com": {
+	"spanishdict.com": {
 		"language": "es",
 		"targetWordSource": "html",
 		"targetWordSelector": "div[id^='headword-es'], div[id^='quickdef1-en']",
 		"exampleSelector": "span[lang^='es']"
 	},
-	"www.dictionary.com": {
+	"dictionary.com": {
 		"language": "en",
 		"targetWordSource": "html",
 		"targetWordSelector": ".entry-headword h1",
 		"exampleSelector": ".luna-example"
 	},
-	"www.collinsdictionary.com": {
+	"collinsdictionary.com": {
 		"language": "en",
 		"targetWordSource": "url",
 		"exampleSelector": ".type-example"

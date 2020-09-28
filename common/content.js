@@ -2,7 +2,10 @@ var language;
 var targetWord;
 
 chrome.storage.sync.get(["sitesSettings"], function(result) {
-    const siteSetting = (result.sitesSettings || defaultSitesSettings)[location.hostname];
+    const hostnameWithoutWww = location.hostname.replace(/^www\./g, '');
+    const hostnameWithoutTopDomain = hostnameWithoutWww.replace(/\.[^.]+$/g, '.*');
+    const settingsList = result.sitesSettings || defaultSitesSettings;
+    const siteSetting = settingsList[hostnameWithoutWww] || settingsList[hostnameWithoutTopDomain];
 
     if (!siteSetting) {
         return;
