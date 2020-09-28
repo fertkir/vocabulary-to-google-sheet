@@ -37,5 +37,16 @@ const defaultSitesSettings = {
 		"targetWordSource": "html",
 		"targetWordSelector": "div[id^='headword-es'], div[id^='quickdef1-en']",
 		"exampleSelector": "span[lang^='es']"
+	},
+	"www.dictionary.com": {
+		"language": "en",
+		"targetWordSource": "html",
+		"targetWordSelector": ".entry-headword h1",
+		"exampleSelector": ".luna-example"
+	},
+	"www.collinsdictionary.com": {
+		"language": "en",
+		"targetWordSource": "url",
+		"exampleSelector": ".type-example"
 	}
 };
