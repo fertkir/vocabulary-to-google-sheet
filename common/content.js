@@ -46,7 +46,8 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
             const exampleString = exampleElement
                 .text()
                 .replace(/\[(.*?)\]/g, "") // removing everything in brackets, including "[Save]"
-                .trim();
+                .trim()
+                .replace(/^"?|"?$/g, ''); // removing leading & trailing double quotes if any
             stringWithMarkedWord = markTargetWord(exampleString);
             console.log(stringWithMarkedWord);
             if (!isWordMarked(stringWithMarkedWord)) {

@@ -4,6 +4,12 @@ const defaultSitesSettings = {
 		"targetWordSource": "url",
 		"exampleSelector": "div.examp, li.eg"
 	},
+	"www.google.com": {
+		"language": "en",
+		"targetWordSource": "html",
+		"targetWordSelector": "span[data-dobid^='hdw']",
+		"exampleSelector": "div.vk_gy"
+	},
 	"www.thefreedictionary.com": {
 		"language": "en",
 		"targetWordSource": "url",
