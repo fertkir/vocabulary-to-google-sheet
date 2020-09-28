@@ -74,17 +74,21 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
 });
 
 function markTargetWord(str) {
-    let word = targetWord;
-    if (language === 'en') {
-        word = targetWord.endsWith('y') 
-            ? targetWord.substring(0, targetWord.length - 1) 
-            : targetWord;
-    } else if (language === 'es') {
-        word = targetWord.length > 3
-            ? targetWord.substring(0, targetWord.length - 2) 
-            : targetWord;
+    const workEndingRegex = "[^\\s.?,!:;]*";
+    let regex = "";
+    for (let word of targetWord.split(" ")) {
+        if (language === 'en') {
+            word = (word.endsWith('y') || word.endsWith('e'))
+                ? word.substring(0, word.length - 1) 
+                : word;
+        } else if (language === 'es') {
+            word = word.length > 3
+                ? word.substring(0, word.length - 2) 
+                : word;
+        }
+        regex += (regex === "" ? "" : "\\s+") + word + workEndingRegex;
     }
-	return str.replace(new RegExp(word + "[^\\s.?,!:;]*","ig"), "*$&*");
+	return str.replace(new RegExp(regex,"ig"), "*$&*");
 }
 
 function isWordMarked(str) {
