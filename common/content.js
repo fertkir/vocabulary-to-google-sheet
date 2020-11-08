@@ -74,22 +74,27 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
 });
 
 function markTargetWord(str) {
-    const workEndingRegex = "[^\\s.?,!:;]*";
+    const wordEndingRegex = "[^\\s.?,!:;]*";
     let regex = "";
     for (let word of targetWord.split(" ")) {
         if (language === 'en') {
-            word = (word.endsWith('y') || word.endsWith('e'))
-                ? word.substring(0, word.length - 1) 
-                : word;
+            if (word !== targetWord && PRONOUNS_EN.has(word)) {
+                continue;
+            } else if (word.endsWith('y') || word.endsWith('e')) {
+                word = word.substring(0, word.length - 1);
+            }
         } else if (language === 'es') {
-            word = word.length > 3
-                ? word.substring(0, word.length - 2) 
-                : word;
+            if (word.length > 3) {
+                word = word.substring(0, word.length - 2);
+            }
         }
-        regex += (regex === "" ? "" : "\\s+") + word + workEndingRegex;
+        regex += (regex === "" ? "" : "\\s+") + word + wordEndingRegex;
     }
+    console.log(regex);
 	return str.replace(new RegExp(regex,"ig"), "*$&*");
 }
+
+const PRONOUNS_EN = new Set(["sth", "sb", "something", "somebody", "someone"]);
 
 function isWordMarked(str) {
 	return str.indexOf("*") != -1;
