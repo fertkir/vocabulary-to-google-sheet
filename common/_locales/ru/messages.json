@@ -3,7 +3,7 @@
     "message": "Vocabulary to Google Sheet"
   },
   "extensionDescription": {
-    "message": "Добавляет на страницы словарей ссылки для сохранения слов вместе с контекстом в Google Таблицу."
+    "message": "Cохраняйте примеры употребления слов в Google Таблицу в один клик."
   },
   "setSpreadSheetId": {
     "message": "задайте ID Google таблицы в настройках расширения"
