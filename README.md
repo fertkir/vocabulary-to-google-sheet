@@ -39,6 +39,9 @@ Since sentences detection is based on regular expressions, it would be quite fas
 #### For iPhone
 Not supported yet. If you'd like to have it, please raise an issue with proposal.
 
+# [How to install](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install)
+How to install the extension and how to setup a target Google Sheet for it, please read [here](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install).
+
 # How to build
 ### Requirements
 1. Ubuntu or other Linux distribution.
