@@ -21,7 +21,7 @@ The full list can be found [here](https://github.com/fertkir/vocabulary-to-googl
 * https://dictionary.cambridge.org/
 * https://www.spanishdict.com/
 
-Since sentences detection is based on regular expressions, it would be quite fast to add support for other dictionaries.
+Since sentences detection is based on regular expressions, it would be quite fast to add support of other dictionaries.
 
 # How to get it?
 #### For desktops
