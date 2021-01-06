@@ -16,7 +16,7 @@ This browser extension allows you to have those sentences to look like this in y
 Where **[Save]** is a link. When you click it, the sentence is saved to your Google Sheet. Isn't that cool? =)
 
 ### I like it! But what do I do with those sentences in a Google Sheet?
-There's [a nice Google Sheet add-on](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408) that will automate the learning process. Once you've saved the sentences, you'll periodically receive emails with them to recollect.
+There's [a nice Google Sheet add-on](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408) that will automate the learning process. Once you've saved the sentences, you'll periodically receive emails with them to recollect. More details how [the Google Sheet add-on](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408) works, what it does and how often does it send email can be found in the [add-on description](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408).
 
 ### What online dictionaries are supported?
 The full list can be found [here](https://github.com/fertkir/vocabulary-to-google-sheet/blob/main/common/sites-settings.js), among them are:
