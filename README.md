@@ -15,6 +15,14 @@ This browser extension allows you to have those sentences to look like this in y
 
 Where **[Save]** is a link. When you click it, the sentence is saved to your Google Sheet. Isn't that cool? =)
 
+# What online dictionaries are supported?
+The full list can be found [here](https://github.com/fertkir/vocabulary-to-google-sheet/blob/main/common/sites-settings.js), among them are:
+* https://www.google.com/
+* https://dictionary.cambridge.org/
+* https://www.spanishdict.com/
+
+Since sentences detection is based on regular expressions, it would be quite fast to add support for other dictionaries.
+
 # How to get it?
 #### For desktops
 * [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/vocabulary-to-google-sheet/)
