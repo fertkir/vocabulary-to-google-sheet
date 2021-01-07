@@ -14,7 +14,7 @@ browser.runtime.onMessage.addListener(
 
 async function addLineToSheet(line, dictionaryUrl, language, token) {
   const settings = await getSettings();
-  let url = `https://sheets.googleapis.com/v4/spreadsheets/${settings.spreadsheet}/values/${settings.sheets[language]}:append`;
+  let url = `https://sheets.googleapis.com/v4/spreadsheets/${settings.spreadsheet}/values/${settings.sheets[language]}!A1:append`;
   url += `?valueInputOption=USER_ENTERED`;
 
   const response = await fetch(url, {
