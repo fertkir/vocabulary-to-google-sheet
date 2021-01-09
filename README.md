@@ -1,4 +1,5 @@
 # What is it for?
+Watch in [this video](https://www.youtube.com/watch?v=KGMwl8s3xDk).
 Suppose you're learning a language, how do you remember new vocabulary? There're beliefs that the best approach is to read a sentence which has a new word in it. 
 
 For example, you want to remember a word <ins>car</ins>. You open an online dictionary and see these examples:
