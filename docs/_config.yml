@@ -1,3 +1,5 @@
 theme: jekyll-theme-minimal
 title: Vocabulary to Google Sheet
 logo: logo/vocabulary-to-spreadsheet-128.png
+show_downloads: true
+google_analytics: UA-186998527-4
