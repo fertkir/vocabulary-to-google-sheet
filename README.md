@@ -1,6 +1,3 @@
-![Version 1.0](http://img.shields.io/badge/version-0.3.5-orange.svg)
-![MIT License](http://img.shields.io/badge/license-MIT%20License-blue.svg)
-
 # What is it for?
 Watch in [this video](https://www.youtube.com/watch?v=KGMwl8s3xDk).
 Suppose you're learning a language, how do you remember new vocabulary? There're beliefs that the best approach is to read a sentence which has a new word in it. 
