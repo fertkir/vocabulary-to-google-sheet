@@ -12,6 +12,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           dry_run: true
+
       - name: Build the app
         id: build
         run: ./build.sh ${{ steps.calc_next_version.outputs.new_version }}
@@ -20,6 +21,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v5.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+  
       - name: Create a GitHub release
         id: create_release
         uses: actions/create-release@v1
@@ -29,6 +31,7 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+
       - name: Upload chrome extension to GitHub release
         uses: actions/upload-release-asset@v1
         env:
@@ -38,6 +41,7 @@ jobs:
           asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
           asset_name: chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
           asset_content_type: application/zip
+
       - name: Upload kiwi extension to GitHub release
         uses: actions/upload-release-asset@v1
         env:
@@ -47,6 +51,7 @@ jobs:
           asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/kiwi-${{ steps.calc_next_version.outputs.new_version }}.crx
           asset_name: kiwi-${{ steps.calc_next_version.outputs.new_version }}.crx
           asset_content_type: application/zip
+
       - name: Upload firefox extension to GitHub release
         uses: actions/upload-release-asset@v1
         env:
