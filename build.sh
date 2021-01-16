@@ -1,4 +1,4 @@
-version=$(jq -r '.version' common/manifest.json)
+version=${1:-"1.0.0-SNAPSHOT"}
 
 # cleaning
 rm -rf build
@@ -14,6 +14,7 @@ cd .build-common
 settings_json=$(cat sites-settings.json)
 echo "const defaultSitesSettings = $settings_json;" > sites-settings.json
 mv sites-settings.json sites-settings.js
+jq ". += {\"version\": \"$version\"}" ../../common/manifest.json > manifest.json
 cd ..
 
 # building firefox extension
