@@ -30,7 +30,7 @@ function showStatusMessage(message) {
 }
 
 async function fetchSiteSettings() {
-  const response = await fetch('https://fertkir.bitbucket.io/vocabulary/browser-addon/sites-settings.json');
+  const response = await fetch('https://raw.githubusercontent.com/fertkir/vocabulary-to-google-sheet/main/common/sites-settings.js');
   if (response.status !== 200) {
     throw new Error(response.statusText);
   }
