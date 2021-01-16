@@ -1,10 +1,6 @@
 name: Create release
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'New version'
-        required: true
 jobs:
   build:
     runs-on: ubuntu-latest
