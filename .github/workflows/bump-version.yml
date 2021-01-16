@@ -18,7 +18,7 @@ jobs:
           dry_run: true
       - name: Build the app
         id: build
-        run: ./build.sh
+        run: ./build.sh ${{ steps.calc_next_version.outputs.new_version }}
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.1
