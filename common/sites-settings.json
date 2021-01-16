@@ -1,4 +1,4 @@
-const defaultSitesSettings = {
+{
 	"dictionary.cambridge.org": {
 		"language": "en",
 		"targetWordSource": "url",
@@ -49,4 +49,4 @@ const defaultSitesSettings = {
 		"targetWordSource": "url",
 		"exampleSelector": ".type-example"
 	}
-};
+}
