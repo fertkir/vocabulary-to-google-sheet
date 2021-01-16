@@ -25,6 +25,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create a GitHub release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,3 +33,30 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+      - name: Upload chrome extension
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
+          asset_name: chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
+          asset_content_type: application/zip
+      - name: Upload kiwi extension
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/kiwi-${{ steps.calc_next_version.outputs.new_version }}.crx
+          asset_name: kiwi-${{ steps.calc_next_version.outputs.new_version }}.crx
+          asset_content_type: application/zip
+      - name: Upload firefox extension
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
+          asset_name: firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
+          asset_content_type: application/zip
