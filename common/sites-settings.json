@@ -15,6 +15,11 @@
 		"targetWordSource": "url",
 		"exampleSelector": "span.illustration"
 	},
+	"idioms.thefreedictionary.com": {
+		"language": "en",
+		"targetWordSource": "url",
+		"exampleSelector": "span.illustration"
+	},
 	"macmillandictionary.com": {
 		"language": "en",
 		"targetWordSource": "html",
