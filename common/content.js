@@ -25,7 +25,9 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
 
     console.log('targetWord: ' + targetWord);
 
-    const exampleTag = $(siteSetting.exampleSelector);
+    const exampleTag = typeof siteSetting.getExampleFromSibling !== "undefined"
+      ? $(siteSetting.exampleSelector).siblings(siteSetting.getExampleFromSibling)
+      : $(siteSetting.exampleSelector);
 
     exampleTag.each(function(index) {
         $(this).append(`&nbsp;<a class="saveLink" href="javascript:void(0);">[${browser.i18n.getMessage("save")}]</a>`);

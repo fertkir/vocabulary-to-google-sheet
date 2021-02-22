@@ -7,8 +7,9 @@
 	"google.*": {
 		"language": "en",
 		"targetWordSource": "html",
-		"targetWordSelector": "span[data-dobid^='hdw']",
-		"exampleSelector": "div.vk_gy"
+		"targetWordSelector": "span[data-dobid^='hdw']:first",
+		"exampleSelector": "div[data-dobid^='dfn']",
+		"getExampleFromSibling": "div.vmod"
 	},
 	"thefreedictionary.com": {
 		"language": "en",

@@ -1,4 +1,4 @@
-version=${1:-"1.0.0-SNAPSHOT"}
+version=${1:-"1.0.0"}
 
 # cleaning
 rm -rf build
