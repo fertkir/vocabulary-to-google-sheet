@@ -36,7 +36,12 @@
 		"language": "ru",
 		"targetWordSource": "url",
 		"exampleSelector": ".example-block",
-		"excludedChildrenFromExampleSelector": ".example-details"
+		"excludedChildrenFromExample": ".example-details"
+	},
+	"en.wiktionary.org": {
+		"language": "en",
+		"targetWordSource": "url",
+		"exampleSelector": "div.h-usage-example"
 	},
 	"spanishdict.com": {
 		"language": "es",
