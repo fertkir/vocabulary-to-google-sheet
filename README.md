@@ -38,7 +38,7 @@ Since sentences detection is based on regular expressions, it would be quite fas
 * [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) now is the only option for Android. Based on Chromium, it allows installing extensions.
 
 #### For iPhone
-Not supported yet. If you'd like to have it, please raise an issue with proposal.
+Unfortunately, iPhone doesn't support browser extenstions. [Vocabulary 90 add-on](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408) supports adding sentences through a Google Form ([see screenshots here](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408)). Currently it's the most convenient way for iPhones.
 
 # [How to install](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install)
 How to install the extension and how to setup a target Google Sheet for it, please read [here](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install).
