@@ -29,6 +29,9 @@
   "optionsSpreadsheetId": {
     "message": "Spreadsheet ID"
   },
+  "optionsSelectSpreadsheet": {
+    "message": "--Please select a spreadsheet--"
+  },
   "optionsSaveUrls": {
     "message": "Save URLs"
   },

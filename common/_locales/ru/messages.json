@@ -29,6 +29,9 @@
   "optionsSpreadsheetId": {
     "message": "ID Google таблицы"
   },
+  "optionsSelectSpreadsheet": {
+    "message": "--Выберите документ--"
+  },
   "optionsSaveUrls": {
     "message": "Сохранять URL"
   },

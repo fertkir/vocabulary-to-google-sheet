@@ -1,19 +1,20 @@
 {
- "browser_action": {
-   "default_icon": "icons/icon128.png"
- },
- "permissions": [
-  "identity",
-  "storage",
-    "webRequest",
-    "http://localhost/vocabulary-add/*"
-],
- "browser_specific_settings": {
-  "gecko": {
-    "id": "{7cadcc4b-af6c-4227-a247-7122bfeea911}"
-  }
-},
-"icons": {
-	"48": "icons/icon48.png"
-}
+	"browser_action": {
+		"default_icon": "icons/icon128.png"
+	},
+	"permissions": [
+		"identity",
+		"storage",
+		"webRequest",
+		"http://localhost/vocabulary-add/*",
+		"https://www.googleapis.com/*"
+	],
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "{7cadcc4b-af6c-4227-a247-7122bfeea911}"
+		}
+	},
+	"icons": {
+		"48": "icons/icon48.png"
+	}
 }
