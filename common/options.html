@@ -6,7 +6,11 @@
 </head>
 <body>
 
-<label for="spreadsheet">__MSG_optionsSpreadsheetId__</label><input id="spreadsheet"/><br/>
+<label for="spreadsheet">__MSG_optionsSpreadsheetId__</label>
+<select id="spreadsheet">
+	<option value="" selected disabled hidden>__MSG_optionsSelectSpreadsheet__</option>
+</select>
+<input hidden id="spreadsheetId"/><br/>
 <label for="sendUrls">__MSG_optionsSaveUrls__</label><input type="checkbox" id="sendUrls"/><br/>
 <label for="enSheet">__MSG_optionsEnglishSheet__</label><input id="enSheet"/><br/>
 <label for="esSheet">__MSG_optionsSpanishSheet__</label><input id="esSheet"/><br/>
@@ -16,7 +20,7 @@
 <button id="save">__MSG_optionsSave__</button>
 <button id="reloadSettings">__MSG_optionsLoadSiteSettings__</button>
 
-<script src="options-polyfills.js"></script>
+<script src="background-polyfills.js"></script>
 <script src="options.js"></script>
 </body>
 </html>

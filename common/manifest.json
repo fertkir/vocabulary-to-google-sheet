@@ -11,7 +11,7 @@
     "js": ["jquery-3.4.1.min.js", "sites-settings.js", "content-polyfills.js", "content.js"]
   }],
   "options_ui": {
-    "page": "options/options.html",
+    "page": "options.html",
     "open_in_tab": false
   }
 }

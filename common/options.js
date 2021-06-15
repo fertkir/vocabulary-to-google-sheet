@@ -20,6 +20,7 @@ function localizeHtmlPage()
 }
 
 localizeHtmlPage();
+fillSpreadsheetSelect();
 
 function showStatusMessage(message) {
   var status = document.getElementById('status');
@@ -69,12 +70,51 @@ function restore_options() {
     esSheet: 'Español',
     ruSheet: 'Русский'
   }, function(items) {
-    document.getElementById('spreadsheet').value = items.spreadsheet;
+    document.getElementById('spreadsheetId').value = items.spreadsheet;
     document.getElementById('sendUrls').checked = items.sendUrls;
     document.getElementById('enSheet').value = items.enSheet;
     document.getElementById('esSheet').value = items.esSheet;
     document.getElementById('ruSheet').value = items.ruSheet;
   });
+}
+
+function fillSpreadsheetSelect() {
+  const select = document.getElementById('spreadsheet');
+  authorize().then(function(token) {
+    getSpreadsheets(token).then(function(response) {
+      response.files.forEach(file => {
+        addSpreadsheetOption(select, file.id, file.name);
+      });
+      select.value = document.getElementById('spreadsheetId').value;
+    }, function(error) {
+      // todo handle
+    });
+  });
+}
+
+function addSpreadsheetOption(select, id, name) {
+  const opt = document.createElement('option');
+  opt.value = id;
+  opt.innerHTML = name;
+  select.appendChild(opt);
+}
+
+async function getSpreadsheets(token) {
+  const url = "https://www.googleapis.com/drive/v3/files" 
+  + "?q=mimeType='application/vnd.google-apps.spreadsheet' and " 
+  + `('me' in owners or 'me' in writers)`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  if (response.status !== 200) {
+    throw new Error(response.statusText);
+  }
+  return response.json(); // parses JSON response into native JavaScript objects
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);

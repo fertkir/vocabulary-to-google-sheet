@@ -59,7 +59,10 @@ const AUTH_URL = buildAuthUrl();
 function buildAuthUrl() {
   const clientId = '444973037518-p9nbj088l23q3uhd9jnmbbu3lnn535mo.apps.googleusercontent.com';
   const redirectURL = "http://localhost/vocabulary-add/";
-  const scopes = ["https://www.googleapis.com/auth/spreadsheets"];
+  const scopes = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.metadata.readonly"
+  ];
 
   let authURL = "https://accounts.google.com/o/oauth2/auth";
   authURL += `?client_id=${clientId}`;
