@@ -42,16 +42,6 @@ jobs:
           asset_name: chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
           asset_content_type: application/zip
 
-      - name: Upload kiwi extension to GitHub release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/kiwi-${{ steps.calc_next_version.outputs.new_version }}.crx
-          asset_name: kiwi-${{ steps.calc_next_version.outputs.new_version }}.crx
-          asset_content_type: application/zip
-
       - name: Upload firefox extension to GitHub release
         uses: actions/upload-release-asset@v1
         env:
