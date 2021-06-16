@@ -37,14 +37,4 @@ zip -r -1 ../release/$version/chrome-$version.crx *
 cd ..
 rm -r .build-chrome
 
-# building kiwi extension
-cp -a ../kiwi/. .build-kiwi
-cp -a .build-common/. .build-kiwi
-jq -s '.[0] * .[1]' .build-common/manifest.json ../kiwi/manifest.json > .build-kiwi/manifest.json
-cd .build-kiwi
-zip -r -1 ../develop/kiwi.crx *
-zip -r -1 ../release/$version/kiwi-$version.crx *
-cd ..
-rm -r .build-kiwi
-
 rm -r .build-common
