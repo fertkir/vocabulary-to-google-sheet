@@ -52,4 +52,4 @@ How to install the extension and how to setup a target Google Sheet for it, plea
 ### Building process
 Run `./build.sh`
 
-Builded extensions will be in `build/` directory.
+Built extensions will be in `build/` directory.
