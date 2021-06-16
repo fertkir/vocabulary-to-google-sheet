@@ -6,7 +6,10 @@
     "message": "Cохраняйте примеры употребления слов в Google Таблицу в один клик."
   },
   "setSpreadSheetId": {
-    "message": "задайте ID Google таблицы в настройках расширения"
+    "message": "выберите Google таблицу в настройках расширения"
+  },
+  "checkSheetNames": {
+    "message": "проверьте правильность названия листа в Google-таблице"
   },
   "couldNotSave": {
     "message": "Не удалось сохранить"
@@ -27,7 +30,7 @@
     "message": "Настройки"
   },
   "optionsSpreadsheetId": {
-    "message": "ID Google таблицы"
+    "message": "Google таблица"
   },
   "optionsSelectSpreadsheet": {
     "message": "--Выберите документ--"

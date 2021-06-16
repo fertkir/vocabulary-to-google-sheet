@@ -38,6 +38,7 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
         const parent = self.parent();
         const manuallyEditedInput = parent.find(".manuallyEdited").first();
         const manuallyEditedValue = manuallyEditedInput.find("textarea").first().val();
+        self.nextAll().remove();
         let stringWithMarkedWord;
         if (manuallyEditedValue) {
             stringWithMarkedWord = manuallyEditedValue;
@@ -60,16 +61,18 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
                 return;
             }
         }
+        self.hide();
         console.log('Saving: "' + stringWithMarkedWord + '"');
-        const saving = $(`<span>${browser.i18n.getMessage("saving")}</span>`).replaceAll(self);
+        const saving = $(`<span>${browser.i18n.getMessage("saving")}</span>`).appendTo(parent);
         browser.runtime.sendMessage({language: language, str: stringWithMarkedWord, url: window.location.href})
             .then(function(response) {
                 manuallyEditedInput.remove();
                 if (response.success) {
                     saving.replaceWith(`<i style="color: green;">${browser.i18n.getMessage("saved")}</i>`);
                 } else {
+                    self.show();
                     console.error('Could not save: "' + stringWithMarkedWord + '"');
-                    saving.replaceWith(`<i style="color: red;">${browser.i18n.getMessage("couldNotSave")} (${response.message})</i>`);
+                    saving.replaceWith(`<i style="color: red;">&nbsp;${browser.i18n.getMessage("couldNotSave")} (${response.message})</i>`);
                 }
             });
     });
@@ -92,7 +95,6 @@ function markTargetWord(str) {
         }
         regex += (regex === "" ? "" : "\\s+") + word + wordEndingRegex;
     }
-    console.log(regex);
 	return str.replace(new RegExp(regex,"ig"), "*$&*");
 }
 

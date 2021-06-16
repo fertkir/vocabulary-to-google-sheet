@@ -6,7 +6,10 @@
     "message": "Save examples from dictionaries to Google Sheet in one click."
   },
   "setSpreadSheetId": {
-    "message": "Please set Spreadsheet ID in extension settings"
+    "message": "Please select spreadsheet in extension settings"
+  },
+  "checkSheetNames": {
+    "message": "Please check that you've set target sheet name correctly"
   },
   "couldNotSave": {
     "message": "Could not save"
@@ -27,7 +30,7 @@
     "message": "Options"
   },
   "optionsSpreadsheetId": {
-    "message": "Spreadsheet ID"
+    "message": "Spreadsheet"
   },
   "optionsSelectSpreadsheet": {
     "message": "--Please select a spreadsheet--"

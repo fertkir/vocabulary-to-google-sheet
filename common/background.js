@@ -26,6 +26,11 @@ async function addLineToSheet(line, dictionaryUrl, language, token) {
     body: JSON.stringify(settings.sendUrls ? {values: [[ line,"","",dictionaryUrl ]]} : {values: [[ line ]]})
   });
   if (response.status !== 200) {
+    if (typeof response.statusText === "undefined" || response.statusText === "") {
+      if (response.status === 400) {
+        throw Error(browser.i18n.getMessage("checkSheetNames"));
+      }
+    }
     throw new Error(response.statusText);
   }
   return response.json(); // parses JSON response into native JavaScript objects
