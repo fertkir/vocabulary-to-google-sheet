@@ -13,6 +13,9 @@
     "matches": ["<all_urls>"],
     "js": ["jquery-3.4.1.min.js", "sites-settings.js", "content.js"]
   }],
+  "icons": {
+    "48": "icons/icon48.png"
+  },
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
@@ -23,8 +26,5 @@
     "webRequest",
     "http://localhost/vocabulary-add/*",
     "https://www.googleapis.com/*"
-  ],
-  "icons": {
-    "48": "icons/icon48.png"
-  }
+  ]
 }
