@@ -7,7 +7,7 @@ const authorize = function() {
 		}
 	}
 	const ANDROID_REDIRECT_URL = "http://localhost/vocabulary-add/";
-	const ACCESS_TOKEN_REGEX = /access_token=([^&]+)&/;
+	const ACCESS_TOKEN_REGEX = /access_token=([^&]+)&?/;
 	const AUTH_URL = function() {
 		const clientId = IS_CHROMIUM 
 		? '444973037518-p9nbj088l23q3uhd9jnmbbu3lnn535mo.apps.googleusercontent.com'
@@ -35,11 +35,15 @@ const authorize = function() {
 		}
 	}
 
-	let AUTH_TOKEN;
+	let ACCESS_TOKEN;
+	let GENERATED_AT;
+	let EXPIRES_IN_MS;
 	let authDialogInitiatorTab;
 
 	browser.webRequest.onBeforeRequest.addListener(function(requestDetails) {
-		AUTH_TOKEN = requestDetails.url.match(ACCESS_TOKEN_REGEX)[1];
+		const requestDetailsUrl = requestDetails.url;
+		ACCESS_TOKEN = requestDetailsUrl.match(ACCESS_TOKEN_REGEX)[1];
+		EXPIRES_IN_MS = 1000 * requestDetailsUrl.match(/expires_in=([^&]+)&?/)[1];
 		closeCurrentTab();
 
 		function closeCurrentTab() {
@@ -57,7 +61,8 @@ const authorize = function() {
 
 	return async function() {
 		authDialogInitiatorTab = await getCurrentTabId();
-		if (!AUTH_TOKEN) {
+		if (!ACCESS_TOKEN || (Date.now() - GENERATED_AT) >= EXPIRES_IN_MS) {
+			GENERATED_AT = Date.now();
 			browser.tabs.create({ url: AUTH_URL });
 		}
 		return tokenPromise();
@@ -65,7 +70,7 @@ const authorize = function() {
 		function tokenPromise() {
 			return new Promise(function (resolve, reject) {
 				(function waitForToken(){
-					if (AUTH_TOKEN) return resolve(AUTH_TOKEN);
+					if (ACCESS_TOKEN) return resolve(ACCESS_TOKEN);
 					setTimeout(waitForToken, 250);
 				})();
 			});
