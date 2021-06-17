@@ -1,6 +1,19 @@
 var language;
 var targetWord;
 
+if (typeof browser === "undefined") {
+    browser = {
+        runtime: {
+            sendMessage: function(msg) {
+                return new Promise(function(resolve, reject) {
+                    chrome.runtime.sendMessage(msg, resolve);
+                });
+            }
+        },
+        i18n: chrome.i18n
+    }
+}
+
 chrome.storage.sync.get(["sitesSettings"], function(result) {
     const hostnameWithoutWww = location.hostname.replace(/^www\./g, '');
     const hostnameWithoutTopDomain = hostnameWithoutWww.replace(/\.[^.]+$/g, '.*');
