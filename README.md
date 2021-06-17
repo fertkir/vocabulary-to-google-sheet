@@ -33,11 +33,7 @@ Since sentences detection is based on regular expressions, it would be quite fas
 * [Google Chrome](https://chrome.google.com/webstore/detail/vocabulary-to-google-shee/iihhhbkpnemncnmefhffhfiecmilppnf)
 
 #### For Android
-Google Chrome doesn't support extensions on Android. 
-
-Mozilla Firefox used to support extensions on Android before [this release](https://blog.mozilla.org/blog/2020/08/25/introducing-a-new-firefox-for-android-experience/). Now it doesn't.
-
-But [Google Chrome's extension](https://chrome.google.com/webstore/detail/vocabulary-to-google-shee/iihhhbkpnemncnmefhffhfiecmilppnf) is supported by the following browsers on Android:
+[Google Chrome's extension](https://chrome.google.com/webstore/detail/vocabulary-to-google-shee/iihhhbkpnemncnmefhffhfiecmilppnf) is supported by the following browsers on Android ([read this manual how to install it](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install#kiwi)):
 * [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser)
 * [Yandex Browser](https://play.google.com/store/apps/details?id=com.yandex.browser)
 
