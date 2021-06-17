@@ -44,7 +44,7 @@ Unfortunately, iPhone doesn't support browser extensions. But [Vocabulary 90 add
 # [How to install](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install)
 How to install the extension and how to setup a target Google Sheet for it, please read [here](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install).
 
-# How to build
+# How to build the source code
 ### Requirements
 1. Ubuntu or other Linux distribution.
 2. jq v.1.5.1 (sudo apt install jq) - for merging manifest.json for different extension distributions.
