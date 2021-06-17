@@ -39,7 +39,7 @@ Since sentences detection is based on regular expressions, it would be quite fas
 * Might be supported by other Chromium-based browsers, but I've tested it only with Kiwi and Yandex.
 
 #### For iPhone
-Unfortunately, iPhone doesn't support browser extensions. [Vocabulary 90 add-on](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408) supports adding sentences through a Google Form ([see screenshots here](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408)). Currently, it's the most convenient way of adding sentences for iPhones.
+Unfortunately, iPhone doesn't support browser extensions. But [Vocabulary 90 add-on](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408) supports adding sentences through a Google Form ([see screenshots here](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408)). Currently, it's the most convenient way of adding sentences for iPhones.
 
 # [How to install](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install)
 How to install the extension and how to setup a target Google Sheet for it, please read [here](https://github.com/fertkir/vocabulary-to-google-sheet/wiki/How-to-install).
