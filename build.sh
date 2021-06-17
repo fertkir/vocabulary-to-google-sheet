@@ -9,31 +9,34 @@ mkdir develop
 mkdir -p release/$version
 
 # building common part
-cp -a ../common/. .build-common
+cp -a ../src/. .build-common
 cd .build-common
+rm manifest-*.json
 settings_json=$(cat sites-settings.json)
 echo "const defaultSitesSettings = $settings_json;" > sites-settings.json
 mv sites-settings.json sites-settings.js
-jq ". += {\"version\": \"$version\"}" ../../common/manifest.json > manifest.json
+jq ". += {\"version\": \"$version\"}" ../../src/manifest.json > manifest.json
 cd ..
 
 # building firefox extension
-cp -a ../firefox/. .build-firefox
 cp -a .build-common/. .build-firefox
-jq -s '.[0] * .[1]' .build-common/manifest.json ../firefox/manifest.json > .build-firefox/manifest.json
 cd .build-firefox
-zip -r -1 ../develop/firefox.xpi *
+jq -s '.[0] * .[1]' manifest.json ../../src/manifest-firefox.json > manifest.json.tmp
+mv manifest.json.tmp manifest.json
 zip -r -1 ../release/$version/firefox-$version.xpi *
+zip -r -1 ../develop/firefox.xpi *
 cd ..
 rm -r .build-firefox
 
 # building chrome extension
-cp -a ../chrome/. .build-chrome
 cp -a .build-common/. .build-chrome
-jq -s '.[0] * .[1]' .build-common/manifest.json ../chrome/manifest.json > .build-chrome/manifest.json
 cd .build-chrome
-cp -R . ../develop/chrome
+jq -s '.[0] * .[1]' manifest.json ../../src/manifest-chrome.json > manifest.json.tmp
+mv manifest.json.tmp manifest.json
 zip -r -1 ../release/$version/chrome-$version.crx *
+jq -s '.[0] * .[1]' manifest.json ../../src/manifest-chrome-dev.json > manifest.json.tmp
+mv manifest.json.tmp manifest.json
+cp -R . ../develop/chrome
 cd ..
 rm -r .build-chrome
 
