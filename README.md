@@ -33,9 +33,10 @@ Since sentences detection is based on regular expressions, it would be quite fas
 * [Google Chrome](https://chrome.google.com/webstore/detail/vocabulary-to-google-shee/iihhhbkpnemncnmefhffhfiecmilppnf)
 
 #### For Android
-* Google Chrome doesn't support extensions on Android
-* Mozilla Firefox used to support extensions on Android before [this release](https://blog.mozilla.org/blog/2020/08/25/introducing-a-new-firefox-for-android-experience/). Now it doesn't.
-* [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) now is the only option for Android. Based on Chromium, it allows installing extensions.
+Google Chrome doesn't support extensions on Android. Mozilla Firefox used to support extensions on Android before [this release](https://blog.mozilla.org/blog/2020/08/25/introducing-a-new-firefox-for-android-experience/). Now it doesn't.
+But [Google Chrome's extension](https://chrome.google.com/webstore/detail/vocabulary-to-google-shee/iihhhbkpnemncnmefhffhfiecmilppnf) is supported by the following browsers on Android:
+* [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser)
+* [Yandex Browser](https://play.google.com/store/apps/details?id=com.yandex.browser)
 
 #### For iPhone
 Unfortunately, iPhone doesn't support browser extenstions. [Vocabulary 90 add-on](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408) supports adding sentences through a Google Form ([see screenshots here](https://gsuite.google.com/marketplace/app/vocabulary_90/637385062408)). Currently, it's the most convenient way of adding sentences for iPhones.
