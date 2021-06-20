@@ -25,6 +25,7 @@ jq -s '.[0] * .[1]' manifest.json ../../src/manifest-firefox.json > manifest.jso
 mv manifest.json.tmp manifest.json
 zip -r -1 ../release/$version/firefox-$version.xpi *
 zip -r -1 ../develop/firefox.xpi *
+cp manifest.json ../release/$version/firefox-manifest.json
 cd ..
 rm -r .build-firefox
 
