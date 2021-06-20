@@ -53,7 +53,7 @@ jobs:
           asset_content_type: application/zip
           
       - name: Upload extension to Chrome Web Store
-        uses: Klemensas/chrome-extension-upload-action@1.4.1
+        uses: Passiverecords/chrome-extension-upload-action@1.4.1
         with:
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
