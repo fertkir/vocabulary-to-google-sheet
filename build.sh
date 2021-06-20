@@ -34,6 +34,7 @@ cd .build-chrome
 jq -s '.[0] * .[1]' manifest.json ../../src/manifest-chrome.json > manifest.json.tmp
 mv manifest.json.tmp manifest.json
 zip -r -1 ../release/$version/chrome-$version.crx *
+cp ../release/$version/chrome-$version.crx ../release/$version/chrome-$version.zip
 jq -s '.[0] * .[1]' manifest.json ../../src/manifest-chrome-dev.json > manifest.json.tmp
 mv manifest.json.tmp manifest.json
 cp -R . ../develop/chrome
