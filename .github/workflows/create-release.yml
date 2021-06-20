@@ -65,7 +65,7 @@ jobs:
       - name: Upload extension to Mozilla Add-ons
         uses: trmcnvn/firefox-addon@v1
         with:
-          uuid: '{7b312f5e-9680-436b-acc1-9b09f60e8aaa}'
+          uuid: '{7cadcc4b-af6c-4227-a247-7122bfeea911}'
           xpi: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
           manifest: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-manifest.json
           api-key: ${{ secrets.MOZILLA_JWT_ISSUER }}
