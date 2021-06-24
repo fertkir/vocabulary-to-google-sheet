@@ -85,28 +85,28 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
         }
       });
 
-      function markTargetWord(str) {
-        const wordEndingRegex = "[^\\s.?,!:;]*";
-        let regex = "";
-        for (let word of targetWord.split(" ")) {
-          if (language === 'en') {
-            if (word !== targetWord && PRONOUNS_EN.has(word)) {
-              continue;
-            } else if (word.endsWith('y') || word.endsWith('e')) {
-              word = word.substring(0, word.length - 1);
-            }
-          } else if (language === 'es') {
-            if (word.length > 3) {
-              word = word.substring(0, word.length - 2);
-            }
+    function markTargetWord(str) {
+      const wordEndingRegex = "[^\\s.?,!:;]*";
+      let regex = "";
+      for (let word of targetWord.split(" ")) {
+        if (language === 'en') {
+          if (word !== targetWord && PRONOUNS_EN.has(word)) {
+            continue;
+          } else if (word.endsWith('y') || word.endsWith('e')) {
+            word = word.substring(0, word.length - 1);
           }
-          regex += (regex === "" ? "" : "\\s+") + word + wordEndingRegex;
+        } else if (language === 'es') {
+          if (word.length > 3) {
+            word = word.substring(0, word.length - 2);
+          }
         }
-        return str.replace(new RegExp(regex,"ig"), "*$&*");
+        regex += (regex === "" ? "" : "\\s+") + word + wordEndingRegex;
       }
+      return str.replace(new RegExp(regex,"ig"), "*$&*");
+    }
 
-      function isWordMarked(str) { return str.indexOf("*") != -1 }
-    });
+    function isWordMarked(str) { return str.indexOf("*") != -1 }
+  });
 });
 
 const PRONOUNS_EN = new Set(["sth", "sb", "something", "somebody", "someone"]);
