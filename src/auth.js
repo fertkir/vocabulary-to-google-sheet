@@ -38,42 +38,32 @@ const authorize = function() {
 	let ACCESS_TOKEN;
 	let GENERATED_AT;
 	let EXPIRES_IN_MS;
-	let authDialogInitiatorTab;
 
-	browser.webRequest.onBeforeRequest.addListener(function(requestDetails) {
-		const requestDetailsUrl = requestDetails.url;
-		ACCESS_TOKEN = requestDetailsUrl.match(ACCESS_TOKEN_REGEX)[1];
-		EXPIRES_IN_MS = 1000 * requestDetailsUrl.match(/expires_in=([^&]+)&?/)[1];
-		closeCurrentTab();
-
-		function closeCurrentTab() {
-			getCurrentTabId().then(function(currentTabId) {
-				browser.tabs.remove(currentTabId);
-			});
-			browser.tabs.update(authDialogInitiatorTab, {active: true});
-		}
+  browser.webRequest.onBeforeRequest.addListener(function(requestDetails) {
+    const requestDetailsUrl = requestDetails.url;
+    ACCESS_TOKEN = requestDetailsUrl.match(ACCESS_TOKEN_REGEX)[1];
+    EXPIRES_IN_MS = 1000 * requestDetailsUrl.match(/expires_in=([^&]+)&?/)[1];
 	}, {urls: [`${ANDROID_REDIRECT_URL}*`]});
 
-	async function getCurrentTabId() {
-		const tabs = await browser.tabs.query({currentWindow: true, active: true});
-		return tabs[0].id;
-	}
+  function invokeWhenReady(timeout, readinessCondition, callback) {
+    return function waitForCondition() {
+      if (readinessCondition()) {
+        return callback();
+      }
+      setTimeout(waitForCondition, timeout);
+    }();
+  }
 
-	return async function() {
-		authDialogInitiatorTab = await getCurrentTabId();
-		if (!ACCESS_TOKEN || (Date.now() - GENERATED_AT) >= EXPIRES_IN_MS) {
-			GENERATED_AT = Date.now();
-			browser.tabs.create({ url: AUTH_URL });
-		}
-		return tokenPromise();
-
-		function tokenPromise() {
-			return new Promise(function (resolve, reject) {
-				(function waitForToken(){
-					if (ACCESS_TOKEN) return resolve(ACCESS_TOKEN);
-					setTimeout(waitForToken, 250);
-				})();
-			});
-		}
-	}
+  return async function() {
+    if (!ACCESS_TOKEN || (Date.now() - GENERATED_AT) >= EXPIRES_IN_MS) {
+      ACCESS_TOKEN = undefined;
+      GENERATED_AT = Date.now();
+      browser.tabs.create({ url: AUTH_URL }).then(function (tab) {
+        invokeWhenReady(100, () => ACCESS_TOKEN, () => browser.tabs.remove(tab.id));
+      });
+    }
+    return new Promise(function (resolve, reject) {
+      return invokeWhenReady(250, () => ACCESS_TOKEN, () => resolve(ACCESS_TOKEN));
+    });
+  }
 }();
