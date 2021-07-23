@@ -7,7 +7,6 @@ const authorize = function() {
 		}
 	}
 	const ANDROID_REDIRECT_URL = "http://localhost/vocabulary-add/";
-	const ACCESS_TOKEN_REGEX = /access_token=([^&]+)&?/;
 	const AUTH_URL = function() {
 		const clientId = IS_CHROMIUM 
 		? '444973037518-p9nbj088l23q3uhd9jnmbbu3lnn535mo.apps.googleusercontent.com'
@@ -24,26 +23,23 @@ const authorize = function() {
 		+ `&scope=${encodeURIComponent(scopes.join(' '))}`;
 	}();
 
-	if (IS_FIREFOX && IS_DESKTOP) {
-		return function() {
-			return browser.identity.launchWebAuthFlow({
-				interactive: true,
-				url: AUTH_URL
-			}).then(function(redirectURL) {
-				return redirectURL.match(ACCESS_TOKEN_REGEX)[1];
-			});
-		}
-	}
-
 	let ACCESS_TOKEN;
 	let GENERATED_AT;
 	let EXPIRES_IN_MS;
 
-  browser.webRequest.onBeforeRequest.addListener(function(requestDetails) {
-    const requestDetailsUrl = requestDetails.url;
-    ACCESS_TOKEN = requestDetailsUrl.match(ACCESS_TOKEN_REGEX)[1];
-    EXPIRES_IN_MS = 1000 * requestDetailsUrl.match(/expires_in=([^&]+)&?/)[1];
-	}, {urls: [`${ANDROID_REDIRECT_URL}*`]});
+  const ACCESS_TOKEN_REGEX = /access_token=([^&]+)&?/;
+  const EXPIRES_IN_REGEX = /expires_in=([^&]+)&?/;
+
+  function parseRedirectUrl(url) {
+    ACCESS_TOKEN = url.match(ACCESS_TOKEN_REGEX)[1];
+    EXPIRES_IN_MS = 1000 * url.match(EXPIRES_IN_REGEX)[1];
+  }
+
+  if (IS_ANDROID) {
+    browser.webRequest.onBeforeRequest.addListener(requestDetails => {
+      parseRedirectUrl(requestDetails.url);
+    }, {urls: [`${ANDROID_REDIRECT_URL}*`]});
+  }
 
   function invokeWhenReady(timeout, readinessCondition, callback) {
     return function waitForCondition() {
@@ -54,13 +50,19 @@ const authorize = function() {
     }();
   }
 
-  return async function() {
+  return function() {
     if (!ACCESS_TOKEN || (Date.now() - GENERATED_AT) >= EXPIRES_IN_MS) {
       ACCESS_TOKEN = undefined;
       GENERATED_AT = Date.now();
-      browser.tabs.create({ url: AUTH_URL }).then(function (tab) {
-        invokeWhenReady(100, () => ACCESS_TOKEN, () => browser.tabs.remove(tab.id));
-      });
+      if (IS_ANDROID) {
+        browser.tabs.create({ url: AUTH_URL }).then(function (tab) {
+          invokeWhenReady(100, () => ACCESS_TOKEN, () => browser.tabs.remove(tab.id));
+        });
+      } else {
+        browser.identity.launchWebAuthFlow({interactive: true, url: AUTH_URL}).then(redirectURL => {
+          parseRedirectUrl(redirectURL);
+        });
+      }
     }
     return new Promise(function (resolve, reject) {
       return invokeWhenReady(250, () => ACCESS_TOKEN, () => resolve(ACCESS_TOKEN));
