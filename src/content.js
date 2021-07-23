@@ -100,7 +100,7 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
             word = word.substring(0, word.length - 2);
           }
         }
-        regex += (regex === "" ? "" : "\\s+") + word + wordEndingRegex;
+        regex += (regex === "" ? "" : "[\\s-]+") + word + wordEndingRegex;
       }
       return str.replace(new RegExp(regex,"ig"), "*$&*");
     }
