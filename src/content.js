@@ -49,20 +49,21 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
     const manuallyEditedInput = parent.find(".manuallyEdited").first();
     const manuallyEditedValue = manuallyEditedInput.find("textarea").first().val();
     self.nextAll().remove();
+    const exampleElement = typeof excludedChildrenFromExample !== 'undefined' 
+      ? parent.clone()
+          .children(excludedChildrenFromExample)
+          .remove()
+          .end()
+      : parent;
+    const exampleString = exampleElement.text()
+      .replace(/\[(.*?)\]/g, "") // removing everything in brackets, including "[Save]"
+      .trim()
+      .replace(/^"?|"?$/g, ''); // removing leading & trailing double quotes if any
+    const preparedUrl = window.location.href + "#:~:text=" + encodeURIComponent(exampleString.substring(0, 50));
     let stringWithMarkedWord;
     if (manuallyEditedValue) {
       stringWithMarkedWord = manuallyEditedValue;
     } else {
-      const exampleElement = typeof excludedChildrenFromExample !== 'undefined' 
-        ? parent.clone()
-            .children(excludedChildrenFromExample)
-            .remove()
-            .end()
-        : parent;
-      const exampleString = exampleElement.text()
-        .replace(/\[(.*?)\]/g, "") // removing everything in brackets, including "[Save]"
-        .trim()
-        .replace(/^"?|"?$/g, ''); // removing leading & trailing double quotes if any
       stringWithMarkedWord = markTargetWord(exampleString);
       console.log(stringWithMarkedWord);
       if (!isWordMarked(stringWithMarkedWord)) {
@@ -73,7 +74,6 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
     self.hide();
     console.log('Saving: "' + stringWithMarkedWord + '"');
     const saving = $(`<span>${browser.i18n.getMessage("saving")}</span>`).appendTo(parent);
-    const preparedUrl = window.location.href + "#:~:text=" + encodeURIComponent(exampleString.substring(0, 50));
     browser.runtime.sendMessage({language: language, str: stringWithMarkedWord, url: preparedUrl})
       .then(function(response) {
         manuallyEditedInput.remove();
