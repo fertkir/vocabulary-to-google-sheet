@@ -73,7 +73,8 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
     self.hide();
     console.log('Saving: "' + stringWithMarkedWord + '"');
     const saving = $(`<span>${browser.i18n.getMessage("saving")}</span>`).appendTo(parent);
-    browser.runtime.sendMessage({language: language, str: stringWithMarkedWord, url: window.location.href})
+    const preparedUrl = window.location.href + "#:~:text=" + encodeURIComponent(exampleString.substring(0, 50));
+    browser.runtime.sendMessage({language: language, str: stringWithMarkedWord, url: preparedUrl})
       .then(function(response) {
         manuallyEditedInput.remove();
         if (response.success) {
