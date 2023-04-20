@@ -2,7 +2,7 @@ if (typeof browser === "undefined") {
   browser = {
     runtime: {
       sendMessage: function(msg) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function(resolve) {
           chrome.runtime.sendMessage(msg, resolve);
         });
       }
@@ -39,7 +39,7 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
     ? $(siteSetting.exampleSelector).siblings(siteSetting.getExampleFromSibling)
     : $(siteSetting.exampleSelector);
 
-  exampleTag.each(function(index) {
+  exampleTag.each(function() {
     $(this).append(`&nbsp;<a class="saveLink" href="javascript:void(0);">[${browser.i18n.getMessage("save")}]</a>`);
   });
 
@@ -60,7 +60,7 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
             .end()
         : parent;
       const exampleString = exampleElement.text()
-        .replace(/\[(.*?)\]/g, "") // removing everything in brackets, including "[Save]"
+        .replace(/\[(.*?)]/g, "") // removing everything in brackets, including "[Save]"
         .trim()
         .replace(/^"?|"?$/g, ''); // removing leading & trailing double quotes if any
       stringWithMarkedWord = markTargetWord(exampleString);
@@ -105,7 +105,7 @@ chrome.storage.sync.get(["sitesSettings"], function(result) {
       return str.replace(new RegExp(regex,"ig"), "*$&*");
     }
 
-    function isWordMarked(str) { return str.indexOf("*") != -1 }
+    function isWordMarked(str) { return str.indexOf("*") !== -1 }
   });
 });
 
