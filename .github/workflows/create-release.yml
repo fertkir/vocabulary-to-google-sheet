@@ -55,13 +55,13 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload extension to Chrome Web Store
-        uses: Passiverecords/chrome-extension-upload-action@1.4.1
+        uses: mnao305/chrome-extension-upload@v4.0.1
         with:
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          file-name: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.zip
-          app-id: 'iihhhbkpnemncnmefhffhfiecmilppnf'
+          file-path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.zip
+          extension-id: 'iihhhbkpnemncnmefhffhfiecmilppnf'
           publish: true
 
       - name: Upload extension to Mozilla Add-ons
