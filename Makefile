@@ -20,37 +20,34 @@ clean:
 
 build_firefox: build_common
 	cp -a $(BUILD_COMMON)/. $(BUILD_FIREFOX); \
-	pushd $(BUILD_FIREFOX); \
+	(cd $(BUILD_FIREFOX); \
 	jq -s '.[0] * .[1]' manifest.json $(SRC_DIR)/manifest-firefox.json > manifest.json.tmp; \
 	mv manifest.json.tmp manifest.json; \
 	zip -r -1 $(RELEASE_VERSION_DIR)/firefox-$(VERSION).xpi *; \
 	zip -r -1 $(DEVELOP_DIR)/firefox.xpi *; \
-	cp manifest.json $(RELEASE_VERSION_DIR)/firefox-manifest.json; \
-	popd; \
+	cp manifest.json $(RELEASE_VERSION_DIR)/firefox-manifest.json); \
 	rm -r $(BUILD_FIREFOX)
 
 build_chrome: build_common
 	cp -a $(BUILD_COMMON)/. $(BUILD_CHROME); \
-	pushd $(BUILD_CHROME); \
+	(cd $(BUILD_CHROME); \
 	jq -s '.[0] * .[1]' manifest.json $(SRC_DIR)/manifest-chrome.json > manifest.json.tmp; \
 	mv manifest.json.tmp manifest.json; \
 	zip -r -1 $(RELEASE_VERSION_DIR)/chrome-$(VERSION).crx *; \
 	cp $(RELEASE_VERSION_DIR)/chrome-$(VERSION).crx $(RELEASE_VERSION_DIR)/chrome-$(VERSION).zip; \
 	jq -s '.[0] * .[1]' manifest.json $(SRC_DIR)/manifest-chrome-dev.json > manifest.json.tmp; \
 	mv manifest.json.tmp manifest.json; \
-	cp -R . $(DEVELOP_DIR)/chrome; \
-	popd; \
+	cp -R . $(DEVELOP_DIR)/chrome); \
 	rm -r $(BUILD_CHROME)
 
 build_common: create_dirs download_libs
 	cp -a $(SRC_DIR)/. $(BUILD_COMMON); \
-	pushd $(BUILD_COMMON); \
+	cd $(BUILD_COMMON); \
 	cp $(LIB_DIR)/$(JQUERY) .; \
 	rm manifest-*.json; \
 	rm sites-settings.json; \
 	echo "const defaultSitesSettings = $$(cat $(SRC_DIR)/sites-settings.json);" > sites-settings.js; \
-	jq ". += {\"version\": \"$(VERSION)\"} | .content_scripts[0].js |= [\"$(JQUERY)\"] + ." $(SRC_DIR)/manifest.json > manifest.json; \
-	popd
+	jq ". += {\"version\": \"$(VERSION)\"} | .content_scripts[0].js |= [\"$(JQUERY)\"] + ." $(SRC_DIR)/manifest.json > manifest.json
 
 create_dirs:
 	mkdir -p $(DEVELOP_DIR)
