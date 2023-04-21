@@ -7,52 +7,53 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Calculate next version
-        id: calc_next_version
-        uses: mathieudutour/github-tag-action@v5.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          dry_run: true
+#      - name: Calculate next version
+#        id: calc_next_version
+#        uses: mathieudutour/github-tag-action@v5.1
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          dry_run: true
 
       - name: Build the app
         id: build
-        run: make VERSION=${{ steps.calc_next_version.outputs.new_version }}
+        run: make VERSION=0.5.12
+#        run: make VERSION=${{ steps.calc_next_version.outputs.new_version }}
 
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v5.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Bump version and push tag
+#        id: tag_version
+#        uses: mathieudutour/github-tag-action@v5.1
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: Create a GitHub release
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+#          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+#          body: ${{ steps.tag_version.outputs.changelog }}
 
-      - name: Create a GitHub release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
-
-      - name: Upload chrome extension to GitHub release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
-          asset_name: chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
-          asset_content_type: application/zip
-
-      - name: Upload firefox extension to GitHub release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
-          asset_name: firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
-          asset_content_type: application/zip
+#      - name: Upload chrome extension to GitHub release
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
+#          asset_name: chrome-${{ steps.calc_next_version.outputs.new_version }}.crx
+#          asset_content_type: application/zip
+#
+#      - name: Upload firefox extension to GitHub release
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
+#          asset_name: firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
+#          asset_content_type: application/zip
 
       - name: Upload extension to Chrome Web Store
         uses: mnao305/chrome-extension-upload@v4.0.1
@@ -62,13 +63,13 @@ jobs:
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           file-path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.zip
           extension-id: 'iihhhbkpnemncnmefhffhfiecmilppnf'
-          publish: true
+          publish: false
 
-      - name: Upload extension to Mozilla Add-ons
-        uses: trmcnvn/firefox-addon@v1
-        with:
-          uuid: '{7cadcc4b-af6c-4227-a247-7122bfeea911}'
-          xpi: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
-          manifest: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-manifest.json
-          api-key: ${{ secrets.MOZILLA_JWT_ISSUER }}
-          api-secret: ${{ secrets.MOZILLA_JWT_SECRET }}
+#      - name: Upload extension to Mozilla Add-ons
+#        uses: trmcnvn/firefox-addon@v1
+#        with:
+#          uuid: '{7cadcc4b-af6c-4227-a247-7122bfeea911}'
+#          xpi: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-${{ steps.calc_next_version.outputs.new_version }}.xpi
+#          manifest: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/firefox-manifest.json
+#          api-key: ${{ secrets.MOZILLA_JWT_ISSUER }}
+#          api-secret: ${{ secrets.MOZILLA_JWT_SECRET }}
