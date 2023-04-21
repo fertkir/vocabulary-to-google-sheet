@@ -1,7 +1,7 @@
 const authorize = function() {
 	if (IS_CHROMIUM && IS_DESKTOP) {
 		return function() {
-			return new Promise(function(resolve, reject) {
+			return new Promise(function(resolve) {
 				chrome.identity.getAuthToken({interactive: true}, resolve);
 			});
 		}
@@ -64,7 +64,7 @@ const authorize = function() {
         });
       }
     }
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
       return invokeWhenReady(250, () => ACCESS_TOKEN, () => resolve(ACCESS_TOKEN));
     });
   }

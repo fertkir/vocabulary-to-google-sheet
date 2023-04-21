@@ -1,4 +1,7 @@
 {
+	"background": {
+		"page": "background.html"
+	},
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "{7cadcc4b-af6c-4227-a247-7122bfeea911}"

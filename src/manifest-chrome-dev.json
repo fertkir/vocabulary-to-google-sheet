@@ -1,4 +1,7 @@
 {
+  "background": {
+    "service_worker": "service-worker.js"
+  },
   "key": "iihhhbkpnemncnmefhffhfiecmilppnf",
   "oauth2": {
     "client_id": "28806920398-1469m84teijjb48roc8vbrg4m4eoe23b.apps.googleusercontent.com"

@@ -10,7 +10,7 @@ if (IS_CHROMIUM) {
 		runtime: {
 			onMessage: {
 				addListener: function(callback) {
-					chrome.extension.onMessage.addListener(callback);
+					chrome.runtime.onMessage.addListener(callback);
 				}
 			},
 			openOptionsPage: function() {
