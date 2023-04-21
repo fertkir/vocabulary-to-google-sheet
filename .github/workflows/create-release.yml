@@ -61,7 +61,8 @@ jobs:
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          file-path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.zip
+#          file-path: ./build/release/${{ steps.calc_next_version.outputs.new_version }}/chrome-${{ steps.calc_next_version.outputs.new_version }}.zip
+          file-path: ./build/release/0.5.12/chrome-0.5.12.zip
           extension-id: 'iihhhbkpnemncnmefhffhfiecmilppnf'
           publish: false
 
