@@ -16,7 +16,7 @@ if (IS_CHROMIUM) {
 				}
 			},
 			openOptionsPage: function() {
-				return new Promise(function(resolve, reject) {
+				return new Promise(function(resolve) {
 					chrome.runtime.openOptionsPage(resolve);
 				});
 			}
@@ -24,7 +24,7 @@ if (IS_CHROMIUM) {
 		storage: {
 			sync: {
 				get: function(keys) {
-					return new Promise(function(resolve, reject) {
+					return new Promise(function(resolve) {
 						chrome.storage.sync.get(keys, resolve);
 					});
 				}
@@ -32,22 +32,22 @@ if (IS_CHROMIUM) {
 		},
 		tabs: {
 			create: function(params) {
-				return new Promise(function(resolve, reject) {
+				return new Promise(function(resolve) {
 					chrome.tabs.create(params, resolve);
 				});
 			},
 			query: function(params) {
-				return new Promise(function(resolve, reject) {
+				return new Promise(function(resolve) {
 					chrome.tabs.query(params, resolve);
 				});
 			},
 			remove: function(params) {
-				return new Promise(function(resolve, reject) {
+				return new Promise(function(resolve) {
 					chrome.tabs.remove(params, resolve);
 				});
 			},
 			update: function(initiator, params) {
-				return new Promise(function(resolve, reject) {
+				return new Promise(function(resolve) {
 					chrome.tabs.update(initiator, params, resolve);
 				});
 			}
