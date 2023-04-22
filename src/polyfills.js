@@ -3,9 +3,11 @@ const IS_ANDROID = /Android/.test(USER_AGENT);
 const IS_DESKTOP = !IS_ANDROID;
 const IS_FIREFOX = /Firefox/.test(USER_AGENT);
 const IS_CHROMIUM = !IS_FIREFOX;
+const IS_CHROME = IS_CHROMIUM && navigator.userAgentData.brands.some(brand => brand.brand === 'Google Chrome');
 
 if (IS_CHROMIUM) {
 	browser = {
+		identity: chrome.identity,
 		i18n: chrome.i18n,
 		runtime: {
 			onMessage: {
