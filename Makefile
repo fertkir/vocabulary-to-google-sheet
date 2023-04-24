@@ -10,6 +10,13 @@ BUILD_CHROME := $(BUILD_DIR)/.build-chrome
 DEVELOP_DIR := $(BUILD_DIR)/develop
 RELEASE_DIR := $(BUILD_DIR)/release
 RELEASE_VERSION_DIR := $(RELEASE_DIR)/$(VERSION)
+GOOGLE_DOMAINS := $$(curl https://www.google.com/supported_domains \
+	| sed -e 's/^/www/' \
+	| jq -R -s -c 'split("\n") | map(select(length > 0))' \
+	| jq --arg PREFIX '*://' --arg POSTFIX '/*' '. |= map($$PREFIX + . + $$POSTFIX)')
+OTHER_DOMAINS += $$(cat $(SRC_DIR)/sites-settings.json \
+	| jq 'keys | map(select(contains("google") | not))' \
+	| jq --arg PREFIX '*://' --arg POSTFIX '/*' '. |= map($$PREFIX + . + $$POSTFIX)')
 
 all: clean build_firefox build_chrome
 	rm -r $(BUILD_COMMON)
@@ -47,7 +54,9 @@ build_common: create_dirs download_libs
 	rm manifest-*.json; \
 	rm sites-settings.json; \
 	echo "const defaultSitesSettings = $$(cat $(SRC_DIR)/sites-settings.json);" > sites-settings.js; \
-	jq ". += {\"version\": \"$(VERSION)\"} | .content_scripts[0].js |= [\"$(JQUERY)\"] + ." $(SRC_DIR)/manifest.json > manifest.json
+	jq ". += {\"version\": \"$(VERSION)\"} | .content_scripts[0].js |= [\"$(JQUERY)\"] +." $(SRC_DIR)/manifest.json \
+	| jq ".content_scripts[0].matches += $(OTHER_DOMAINS)" \
+	| jq ".content_scripts[0].matches += $(GOOGLE_DOMAINS)" > manifest.json;
 
 create_dirs:
 	mkdir -p $(DEVELOP_DIR)
